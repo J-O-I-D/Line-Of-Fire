@@ -68,7 +68,7 @@ input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 0 0 4px var(--
 <h1>Line of<br>Fire<b>.</b></h1>
 <p class="lead">Spot the hazard. Stand in the right place. Go home safe.</p>
 <div class="chips"><span class="chip">Instant feedback</span></div>
-<div class="card"><h2>Ready to play?</h2><label for="uname">Your name</label>
+<div class="card"><h2>Ready to play?</h2><label for="uname">Your name or alias</label>
 <input id="uname" maxlength="30" autocomplete="name" placeholder="e.g. Alex M."><div class="err" id="nerr" role="alert"></div>
 <button class="btn red" id="go">Proceed</button></div>
 </section>
@@ -269,12 +269,7 @@ var STORIES_DEF = [
    {
     "n": "It is 8:35. Priya swings into the office car park with her laptop bag, a box of handouts on the back seat and 85 minutes to go. Only one bay is free, near the entrance, and it needs a bit of manoeuvring to reverse into.",
     "q": "How should Priya park?",
-    "o": [
-     "Nose in right away, and worry about getting out later on",
-     "Take the extra minute to reverse in, so she can drive out forward tonight",
-     "Stop in the walkway beside the door and unload the handouts there",
-     "Nose in and trust her reversing camera and sensors when she leaves this evening"
-    ],
+    "o": ["Nose in right away, and worry about getting out later on","Take the extra minute to reverse in, so she can drive out forward tonight","Stop in the walkway beside the door and unload the handouts there","Nose in and trust her reversing camera and sensors when she leaves this evening"],
     "a": 1,
     "e": "The riskiest time to reverse is the end of the day, when the car park is full of people heading home. Reversing in while it is quiet moves the manoeuvre to the safest moment.",
     "g": "She reverses in smoothly and is out of the car by 8:38, with nobody anywhere near her.",
@@ -283,12 +278,7 @@ var STORIES_DEF = [
    {
     "n": "Carrying the box of handouts, Priya heads for the entrance. Two bays ahead, a car's white reversing lights flicker on. The driver seems to be looking at his phone.",
     "q": "What does Priya do?",
-    "o": [
-     "Hurry across behind it, because she is short of time",
-     "Keep walking at her normal pace, since drivers should look before they reverse",
-     "Wave the box of handouts to get his attention while she keeps walking",
-     "Stop and wait until the driver has seen her or the car has finished moving"
-    ],
+    "o": ["Hurry across behind it, because she is short of time","Keep walking at her normal pace, since drivers should look before they reverse","Wave the box of handouts to get his attention while she keeps walking","Stop and wait until the driver has seen her or the car has finished moving"],
     "a": 3,
     "e": "A reversing car has blind spots, and the driver may be distracted. Never rely on someone else to see you; stop until you are sure.",
     "g": "The car rolls back a full bay-length past where she would have been. She exhales and walks on.",
@@ -297,12 +287,7 @@ var STORIES_DEF = [
    {
     "n": "Inside, the corridor to the lift ends in a solid double door with no window. Priya's hands are full with the box and her coffee, and the clock says 8:50.",
     "q": "How should she go through the door?",
-    "o": [
-     "Open it slowly, standing to the side, and check before she walks through",
-     "Bump it open with the box so that she can keep up her pace",
-     "Kick it open so her hands stay on the box and the coffee",
-     "Push it hard so that it clears the way before anyone else can get there first"
-    ],
+    "o": ["Open it slowly, standing to the side, and check before she walks through","Bump it open with the box so that she can keep up her pace","Kick it open so her hands stay on the box and the coffee","Push it hard so that it clears the way before anyone else can get there first"],
     "a": 0,
     "e": "A door with no vision panel hides anyone on the other side. Opening it slowly and from the side keeps you out of its swing and gives the other person time to react.",
     "g": "On the other side, a cleaner with a trolley is just passing. The door stops gently and they both smile.",
@@ -311,12 +296,7 @@ var STORIES_DEF = [
    {
     "n": "At the lift lobby the doors are closing. Inside, her colleague Sam holds up a hand and mouths, 'Come on!' Priya is at the gap with a box in both arms.",
     "q": "What should Priya do?",
-    "o": [
-     "Slide the box into the gap so the doors have to reopen",
-     "Put a foot in the doorway so the sensors reopen the doors for her as well",
-     "Let it go and wait for the next lift, even if it costs her two minutes",
-     "Squeeze through the gap sideways before the doors close"
-    ],
+    "o": ["Slide the box into the gap so the doors have to reopen","Put a foot in the doorway so the sensors reopen the doors for her as well","Let it go and wait for the next lift, even if it costs her two minutes","Squeeze through the gap sideways before the doors close"],
     "a": 2,
     "e": "Closing lift doors can trap hands, feet and bags, and sensors do not always work. A short wait costs far less than an injury.",
     "g": "The next lift arrives in under a minute. Sam texts: 'Sorry, I should have held it properly!'",
@@ -325,12 +305,7 @@ var STORIES_DEF = [
    {
     "n": "On the fifth floor, Priya walks into meeting room B to set up. The wall-mounted screen she will present on has dropped on one side of its bracket and hangs at a slant above the front row of seats.",
     "q": "What should she do?",
-    "o": [
-     "Straighten it by hand and carry on setting up, because it will probably hold",
-     "Keep the seats under it empty, report it, and ask for another room or a repair",
-     "Present from the far side of the room so that she is not under it herself",
-     "Tell the audience not to lean on the table while the screen is above it"
-    ],
+    "o": ["Straighten it by hand and carry on setting up, because it will probably hold","Keep the seats under it empty, report it, and ask for another room or a repair","Present from the far side of the room so that she is not under it herself","Tell the audience not to lean on the table while the screen is above it"],
     "a": 1,
     "e": "Damaged mounts can fail without warning. Keep people out from under it and get it fixed, rather than trusting that it will hold.",
     "g": "Facilities swap her into meeting room D with ten minutes to spare, and the room B screen is tagged out.",
@@ -339,12 +314,7 @@ var STORIES_DEF = [
    {
     "n": "Sam has found a way to adjust the ceiling projector without a ladder: he is standing on a rolling office chair, reaching up, while the first guests are already walking in below him.",
     "q": "What should Priya do?",
-    "o": [
-     "Hold the chair steady with her foot so that he can finish more quickly",
-     "Ask the guests to hurry past underneath while he finishes up the adjustment",
-     "Pass him the remote from below so that he does not need to climb down",
-     "Ask him to get down, use a proper stepladder, and keep people out from underneath"
-    ],
+    "o": ["Hold the chair steady with her foot so that he can finish more quickly","Ask the guests to hurry past underneath while he finishes up the adjustment","Pass him the remote from below so that he does not need to climb down","Ask him to get down, use a proper stepladder, and keep people out from underneath"],
     "a": 3,
     "e": "A rolling chair is an unstable base, and anything he dropped will land on the people below. Use proper access and clear the area underneath.",
     "g": "Sam climbs down, grinning sheepishly. A stepladder and two minutes later, the projector is aligned and nobody was in range.",
@@ -353,12 +323,7 @@ var STORIES_DEF = [
    {
     "n": "The presentation is a triumph. At 6:10pm, tired and happy, Priya walks out into a car park full of people heading home. Her car is where she left it. However she parked this morning, the next minute matters.",
     "q": "What is the safest way for her to leave?",
-    "o": [
-     "Slowly, with full attention on pedestrians, and with a spotter if she must reverse",
-     "Pull out quickly before the car park gets any busier and the queue builds up",
-     "Check her phone for the congratulations messages as she rolls out",
-     "Rely on her horn to warn people she is moving, and keep an eye on her phone"
-    ],
+    "o": ["Slowly, with full attention on pedestrians, and with a spotter if she must reverse","Pull out quickly before the car park gets any busier and the queue builds up","Check her phone for the congratulations messages as she rolls out","Rely on her horn to warn people she is moving, and keep an eye on her phone"],
     "a": 0,
     "e": "Whatever you do, the end-of-day car park is full of people on foot. Drive at walking pace, give your full attention, and get a spotter if you must reverse.",
     "g": "She rolls out slowly. A colleague gives her a thumbs up through the window, and she is home by 7.",
@@ -375,12 +340,7 @@ var STORIES_DEF = [
    {
     "n": "At 9am Dana proudly rolls a trolley towards Marcus with four boxes stacked so high that only her fingertips and the top of her head are visible.",
     "q": "What should Marcus do?",
-    "o": [
-     "Let her go ahead, because she is keen to impress and the lift slot is so short",
-     "Ask her to push faster so she spends less time in the corridor",
-     "Stop her and reduce the stack below eye level, or split it into two trips",
-     "Tell her to look around the side of the stack as she pushes"
-    ],
+    "o": ["Let her go ahead, because she is keen to impress and the lift slot is so short","Ask her to push faster so she spends less time in the corridor","Stop her and reduce the stack below eye level, or split it into two trips","Tell her to look around the side of the stack as she pushes"],
     "a": 2,
     "e": "If the person pushing cannot see where they are going, they cannot avoid people. Fix the load rather than work around it.",
     "g": "Dana re-stacks with a grin. Two trips turn out to be quicker than she expected.",
@@ -389,12 +349,7 @@ var STORIES_DEF = [
    {
     "n": "By ten, Marcus is pushing a trolley himself. He is heading for the corner by reception, where the corridor turns blindly towards the lifts. He can hear voices on the other side.",
     "q": "How does he approach the corner?",
-    "o": [
-     "Slow down, keep to one side and call out as he reaches the corner",
-     "Speed up so that he clears the corner before anyone arrives",
-     "Take it wide and fast, because the trolley has good brakes",
-     "Keep his head down and watch the wheels of the trolley"
-    ],
+    "o": ["Slow down, keep to one side and call out as he reaches the corner","Speed up so that he clears the corner before anyone arrives","Take it wide and fast, because the trolley has good brakes","Keep his head down and watch the wheels of the trolley"],
     "a": 0,
     "e": "Blind corners are where moving loads and people meet. Slowing down and announcing yourself gives everyone time to react.",
     "g": "A cheerful 'Hello!' comes back from the other side, and a colleague carrying a laptop steps aside to let him through.",
@@ -403,12 +358,7 @@ var STORIES_DEF = [
    {
     "n": "The goods lift is full and the clock is ticking. Raj and Tomasz offer to carry a heavy steel filing cabinet down the stairs, with Tomasz going first, below it.",
     "q": "What should Marcus say?",
-    "o": [
-     "Fine, but only with the stronger person below, as they can take the weight if it slips",
-     "Go ahead, but carry it quickly to keep the strain short",
-     "Tilt it and slide it down the stairs on its back",
-     "Wait for the lift or fetch a stair-climbing trolley, so nobody is below the load"
-    ],
+    "o": ["Fine, but only with the stronger person below, as they can take the weight if it slips","Go ahead, but carry it quickly to keep the strain short","Tilt it and slide it down the stairs on its back","Wait for the lift or fetch a stair-climbing trolley, so nobody is below the load"],
     "a": 3,
     "e": "A person below a heavy load on stairs is directly in its path if it slips. Use the lift or the right equipment so that nobody is put there.",
     "g": "Raj finds a stair-climbing trolley in the storeroom. It takes ten minutes longer, and everyone arrives with all their toes.",
@@ -417,12 +367,7 @@ var STORIES_DEF = [
    {
     "n": "On the new floor, a tall bookcase on a trolley starts rocking as it crosses the doorway. It is leaning forward, and Raj, standing in front of it, throws out his arms.",
     "q": "As it begins to fall, what must Raj do?",
-    "o": [
-     "Brace his legs and try to catch it before it hits the floor",
-     "Step away and let it fall, rather than try to catch it",
-     "Push back against it with his shoulder",
-     "Hold it with one hand and call for help"
-    ],
+    "o": ["Brace his legs and try to catch it before it hits the floor","Step away and let it fall, rather than try to catch it","Push back against it with his shoulder","Hold it with one hand and call for help"],
     "a": 1,
     "e": "A falling bookcase weighs far more than anyone can hold. Never try to catch it. Prevention means emptying and securing it before moving it.",
     "g": "Raj leaps clear. The bookcase crashes down with a bang, but the only damage is to the carpet.",
@@ -431,12 +376,7 @@ var STORIES_DEF = [
    {
     "n": "By lunch the corridor outside the new kitchen is cluttered. A large whiteboard is leaning against the wall exactly where people will walk to get their coffee.",
     "q": "What should Marcus do with it?",
-    "o": [
-     "Lay it flat or secure it away from where people walk",
-     "Leave it, because it is against the wall and out of the way",
-     "Lean it more steeply so that it is less likely to slide",
-     "Rest a mug against the bottom edge to stop it sliding"
-    ],
+    "o": ["Lay it flat or secure it away from where people walk","Leave it, because it is against the wall and out of the way","Lean it more steeply so that it is less likely to slide","Rest a mug against the bottom edge to stop it sliding"],
     "a": 0,
     "e": "A leaning panel can slide and fall without being touched. Lay it flat or secure it, instead of relying on friction.",
     "g": "He lays it on padded blocks along the wall and ties it off. Nobody gives it another glance.",
@@ -445,12 +385,7 @@ var STORIES_DEF = [
    {
     "n": "At 2pm the removals van reverses towards the loading door. Dana has a box in her arms and needs to get to the other side of the van, behind it. The glare on the mirror hides the driver's face.",
     "q": "What should Dana do?",
-    "o": [
-     "Cross quickly behind it while it is still moving slowly, since she has the room",
-     "Stand behind it and guide the driver using hand signals as he reverses in",
-     "Stay clear of its path and wait until it has stopped and the driver has seen her",
-     "Walk alongside the rear door as the van reverses"
-    ],
+    "o": ["Cross quickly behind it while it is still moving slowly, since she has the room","Stand behind it and guide the driver using hand signals as he reverses in","Stay clear of its path and wait until it has stopped and the driver has seen her","Walk alongside the rear door as the van reverses"],
     "a": 2,
     "e": "The area behind a reversing vehicle is a blind spot. Stay out of the path unless a trained banksman is directing and the driver has acknowledged you.",
     "g": "Dana stays on the kerb. The van stops with a hiss of brakes, the driver gives her a thumbs up, and she crosses.",
@@ -459,12 +394,7 @@ var STORIES_DEF = [
    {
     "n": "At 4:30pm the last boxes are loaded. Dana ties them down with a stretchy bungee cord, hooking it over the top and pulling it hard with her face close to the hook. Marcus sees it from the cab.",
     "q": "What should Marcus do?",
-    "o": [
-     "Tell her to pull it tighter, so that the hook cannot possibly slip off",
-     "Say nothing, since bungee cords are the usual way to secure boxes in a van",
-     "Tell her to tie it with a neater knot so the boxes stay put",
-     "Stop her: a slipped hook can snap into her face, so use rated ratchet straps"
-    ],
+    "o": ["Tell her to pull it tighter, so that the hook cannot possibly slip off","Say nothing, since bungee cords are the usual way to secure boxes in a van","Tell her to tie it with a neater knot so the boxes stay put","Stop her: a slipped hook can snap into her face, so use rated ratchet straps"],
     "a": 3,
     "e": "Stretched cords store energy. If a hook slips it recoils fast and can cause serious eye injuries. Use suitable straps and keep clear of the line.",
     "g": "Dana is a little shaken but grateful. By 5pm the load is strapped, the team is in the new office, and Marcus's manager messages: 'Great job. No incidents.'",
