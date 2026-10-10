@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Line of Fire Challenge</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--y:#FFD400;--yl:#FFF6C2;--r:#D40000;--rl:#FDE8E8;--k:#111;--m:#4b5563;--l:#e5e7eb;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--k);font:500 17px/1.5 Barlow,"Segoe UI",Arial,sans-serif;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+.tape{height:10px;background:repeating-linear-gradient(-45deg,var(--y) 0 14px,var(--k) 14px 28px)}
+header{max-width:720px;margin:0 auto;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;gap:10px;align-items:center;font:900 22px "Barlow Condensed",Arial,sans-serif;text-transform:uppercase;letter-spacing:.5px}
+.bi{width:34px;height:34px;background:var(--r);color:#fff;border-radius:8px;display:grid;place-items:center;font-size:22px}
+main{max-width:720px;margin:0 auto;padding:6px 18px 60px}
+h1,h2,h3{font-family:"Barlow Condensed",Arial,sans-serif;text-transform:uppercase;margin:0;line-height:1}
+h1{font-size:clamp(60px,17vw,112px);font-weight:900;letter-spacing:-1px}h1 b{color:var(--r)}
+h2{font-size:clamp(28px,6vw,40px);font-weight:800;line-height:1.1}h3{font-size:22px;font-weight:800;margin:22px 0 8px}
+.lead{color:var(--m);margin:12px 0 20px;font-size:19px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.chip{background:var(--yl);border:2px solid var(--k);border-radius:99px;padding:4px 14px;font-weight:700;font-size:15px}
+.card{border:3px solid var(--k);border-radius:14px;padding:22px;box-shadow:6px 6px 0 var(--y);background:#fff}
+label{font-weight:700;font-size:15px;display:block;margin-top:10px}
+input,select,textarea{width:100%;font:inherit;border:3px solid var(--k);border-radius:10px;padding:12px 14px;margin:6px 0 4px;background:#fff;color:var(--k)}
+input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 0 0 4px var(--y)}
+.btn{font:800 21px "Barlow Condensed",Arial,sans-serif;text-transform:uppercase;letter-spacing:.5px;border:3px solid var(--k);border-radius:10px;padding:12px 26px;min-height:52px;cursor:pointer;background:var(--y);color:var(--k);box-shadow:4px 4px 0 var(--k);transition:transform .1s,box-shadow .1s;width:100%;margin-top:14px}
+.btn:hover:not(:disabled){transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--k)}.btn:active:not(:disabled){transform:none;box-shadow:2px 2px 0 var(--k)}
+.btn:disabled{opacity:0.6;cursor:not-allowed}
+.btn.red{background:var(--r);color:#fff}.btn.ghost{background:#fff;width:auto;min-height:40px;padding:6px 16px;font-size:17px;box-shadow:none;margin:0}
+.btn.ghost:hover:not(:disabled){background:var(--yl);transform:none;box-shadow:none}
+:focus-visible{outline:4px solid var(--k);outline-offset:3px}
+.err{color:var(--r);font-weight:700;min-height:24px}.hide{display:none!important}
+.top{position:sticky;top:0;background:#fff;padding:12px 0 10px;z-index:5;border-bottom:3px solid var(--k);margin-bottom:18px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.info{font:800 20px "Barlow Condensed",Arial,sans-serif;text-transform:uppercase}
+.segs{display:flex;gap:3px;margin-top:10px}.segs i{flex:1;height:9px;background:var(--l);border-radius:3px}
+.segs i.ok{background:var(--k)}.segs i.no{background:var(--r)}.segs i.cur{background:var(--y);outline:2px solid var(--k)}
+.ring{position:relative;width:56px;height:56px}.ring svg{transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:6}.ring .bg{stroke:var(--l)}.ring .fg{stroke:var(--k);stroke-linecap:round;stroke-dasharray:138.2}
+.ring.low .fg{stroke:var(--r)}.ring.low span{color:var(--r)}
+.ring span{position:absolute;inset:0;display:grid;place-items:center;font:900 22px "Barlow Condensed",Arial,sans-serif}
+.tag{display:inline-block;background:var(--r);color:#fff;font:800 15px "Barlow Condensed",Arial,sans-serif;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:5px;margin-bottom:10px}
+.opt{display:flex;gap:14px;align-items:center;width:100%;text-align:left;font:600 18px/1.35 Barlow,Arial,sans-serif;color:var(--k);background:#fff;border:3px solid var(--k);border-radius:12px;padding:14px 16px;margin:10px 0;cursor:pointer;min-height:60px}
+.opt .k{flex:none;width:34px;height:34px;border-radius:8px;background:var(--k);color:#fff;display:grid;place-items:center;font:800 18px "Barlow Condensed",Arial,sans-serif}
+.opt:hover:not(:disabled){background:var(--yl)}.opt:disabled{cursor:default}
+.opt.right{background:var(--y)}.opt.right .k{background:var(--k);color:var(--y)}
+.opt.wrong{background:var(--r);color:#fff;border-color:var(--r)}.opt.wrong .k{background:#fff;color:var(--r)}
+.fb{border:3px solid var(--k);border-radius:12px;padding:16px 18px;margin:16px 0 0;background:var(--yl)}
+.fb.bad{background:var(--rl);border-color:var(--r)}.fb strong{display:block;font:900 26px "Barlow Condensed",Arial,sans-serif;text-transform:uppercase}.fb.bad strong{color:var(--r)}
+.score{font:900 clamp(80px,22vw,130px)/1 "Barlow Condensed",Arial,sans-serif}
+.banner{border:3px solid var(--k);border-radius:12px;padding:16px 18px;margin:16px 0;font-size:19px}
+.banner h2{margin-bottom:8px}.t1{background:var(--y)}.t2{background:#fff;box-shadow:6px 6px 0 var(--y)}.t3{background:var(--r);color:#fff}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.tabs .on{background:var(--y)}
+.sc{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:16px}th,td{text-align:left;padding:9px 8px;border-bottom:2px solid var(--l);white-space:nowrap}th{border-bottom:3px solid var(--k);font:800 17px "Barlow Condensed",Arial,sans-serif;text-transform:uppercase}
+.q{display:flex;gap:10px;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:2px solid var(--l)}
+.hub-grid { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; margin-top:20px; }
+.hub-full { grid-column: 1 / -1; }
+.scene{border:3px solid var(--k);border-left:12px solid var(--r);border-radius:12px;background:var(--yl);padding:14px 18px;margin:0 0 18px;font-size:18px}
+.scene .tag{margin-bottom:8px}.scene p{margin:0}
+.nx{margin-top:14px;padding-top:12px;border-top:2px solid var(--k);font-style:italic}.nx b{display:block;font:800 16px "Barlow Condensed",Arial,sans-serif;text-transform:uppercase;font-style:normal;letter-spacing:.5px;margin-bottom:2px}
+.story-intro{margin-top:10px}.story-intro h2{margin:6px 0 12px}.story-intro p{font-size:19px}
+@media (max-width: 500px) { .hub-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+</style></head><body>
+<div class="tape"></div>
+<header><div class="brand"><div class="bi" aria-hidden="true">!</div>Line of Fire</div><button class="btn ghost" id="adm">Admin</button></header>
+<main>
+<section id="s-start">
+<h1>Line of<br>Fire<b>.</b></h1>
+<p class="lead">Spot the hazard. Stand in the right place. Go home safe.</p>
+<div class="chips"><span class="chip">Instant feedback</span></div>
+<div class="card"><h2>Ready to play?</h2><label for="uname">Your name or alias</label>
+<input id="uname" maxlength="30" autocomplete="name" placeholder="e.g. Alex M."><div class="err" id="nerr" role="alert"></div>
+<button class="btn red" id="go">Proceed</button></div>
+</section>
+
+<!-- HUB ACTIVITY SECTION -->
+<section id="s-hub" class="hide">
+<h1>Choose an<br>activity<b>.</b></h1>
+<p class="lead">Select a game mode below, <strong id="hub-uname"></strong>.</p>
+<div class="hub-grid">
+    <!-- Featured: Interactive Quiz -->
+    <div class="card hub-full" style="background:var(--yl); border-color:var(--k); padding:26px;">
+        <h3 style="margin-top:0; font-size:28px;">Interactive Quiz</h3>
+        <p style="font-size:18px; margin-bottom: 20px;">Play the standard Line of Fire challenge. 20 random questions drawn from our bank of questions to test your hazard awareness.</p>
+        <button class="btn" id="play-quiz" style="margin-top:0;">Start Quiz</button>
+    </div>
+    
+    <!-- Story Mode -->
+    <div class="card">
+        <h3 style="margin-top:0">Story Mode</h3>
+        <p style="margin-bottom:20px">Read an evolving workplace scenario and make critical safety decisions.</p>
+        <button class="btn" id="play-story" style="margin-top:0">Start Story</button>
+    </div>
+    
+    <!-- Decode the Hazard -->
+    <div class="card">
+        <h3 style="margin-top:0">Decode the Hazard</h3>
+        <p style="margin-bottom:20px">Lock your answer as three clues progressively reveal a hazard.</p>
+        <button class="btn ghost" disabled style="width:100%; border:2px dashed var(--m); color:var(--m)">Coming Soon</button>
+    </div>
+</div>
+<button class="btn ghost" id="hub-back" style="margin-top:24px">Back to Home</button>
+</section>
+
+<section id="s-quiz" class="hide" aria-live="polite">
+<div class="top"><div class="row"><div><div class="info" id="qn"></div><div class="info" id="qs" style="color:var(--m)"></div></div>
+<div class="ring" id="ring"><svg width="56" height="56" viewBox="0 0 56 56"><circle class="bg" cx="28" cy="28" r="22"/><circle class="fg" id="fg" cx="28" cy="28" r="22"/></svg><span id="tt"></span></div></div>
+<div class="segs" id="segs"></div></div>
+<span class="tag" id="cat"></span><h2 id="qt"></h2>
+<div id="opts"></div>
+<div id="fb" class="fb hide"></div>
+<button class="btn hide" id="next">Next question</button>
+</section>
+
+
+<section id="s-story" class="hide" aria-live="polite">
+<div id="st-intro" class="story-intro">
+<span class="tag">Story Mode</span>
+<h2 id="st-itl"></h2>
+<p id="st-itx"></p>
+<p class="lead" style="margin-top:0">One story, seven decisions. What you choose changes what happens next.</p>
+<button class="btn red" id="st-begin">Begin story</button>
+<button class="btn ghost" id="st-back" style="margin-top:14px">Back to Activities</button>
+</div>
+<div id="st-play" class="hide">
+<div class="top"><div class="row"><div><div class="info" id="st-n"></div><div class="info" id="st-s" style="color:var(--m)"></div></div></div>
+<div class="segs" id="st-segs"></div></div>
+<div class="scene"><span class="tag" id="st-tag"></span><p id="st-scene"></p></div>
+<h2 id="st-qt"></h2>
+<div id="st-opts"></div>
+<div id="st-fb" class="fb hide"></div>
+<button class="btn hide" id="st-next">Next</button>
+</div>
+</section>
+
+<section id="s-end" class="hide"><div class="info" style="color:var(--m)">Your result</div><div class="score" id="fin"></div>
+<div class="banner" id="ban"></div>
+<p class="lead" style="margin-top:0">Your result has been sent to the Safety Administrator.</p>
+<button class="btn" id="again">Back to Activities</button></section>
+
+<section id="s-gate" class="hide"><div class="card"><h2>Admin access</h2><p class="lead">Enter the passkey to view scores and manage questions.</p>
+<label for="code">Passkey</label><input id="code" type="password" inputmode="numeric" autocomplete="off"><div class="err" id="gerr" role="alert"></div>
+<div class="row"><button class="btn" id="genter">Enter</button><button class="btn ghost" id="gback" style="margin-top:14px">Cancel</button></div></div></section>
+
+<section id="s-admin" class="hide"><div class="row"><h2>Admin portal</h2><button class="btn ghost" id="aexit">Exit</button></div>
+<div class="tabs"><button class="btn ghost on" data-t="lb">Leaderboard</button><button class="btn ghost" data-t="qs">Questions</button><button class="btn ghost" data-t="st">Timer</button></div>
+<div class="err" id="anote" style="color:var(--k)"></div><div id="t-lb"></div><div id="t-qs" class="hide"></div><div id="t-st" class="hide"></div></section>
+</main>
+<script>
+var DEF=[
+{z:"Office & Onshore",q:"Which statement best defines 'line of fire'?",o:["The queue formed at the assembly point during an emergency drill","The painted boundary around a hazardous area","The reporting line for escalating an incident to management","The path a moving object, vehicle or released energy could take, which would injure anyone standing in it"],a:3,e:"Line of fire is about the path of energy or movement and whether a person is in it. It is not a boundary, a queue or a reporting structure."},
+{z:"Office & Onshore",q:"Your colleague pulls out the top two drawers of a tall filing cabinet at once to find a file. Which line-of-fire hazard has she just created?",o:["She may get a paper cut","The cabinet can tip forward onto her","The drawers may jam shut on her fingers only","The cabinet may create static electricity"],a:1,e:"Opening multiple drawers shifts the centre of gravity. Tall cabinets should be anchored and only one drawer opened at a time."},
+{z:"Office & Onshore",q:"Boxes of A4 paper are stacked five high on the top shelf of the stationery store, directly above the door. Which is the STRONGEST control?",o:["Move heavy items to low shelves so nothing sits overhead of the doorway","Stick a 'Mind Your Head' sign on the door","Brief staff to enter the store carefully","Ask staff to wear a hard hat when entering the store"],a:0,e:"Elimination beats signs, briefings and PPE. If the object cannot fall onto a person, nobody has to rely on behaviour."},
+{z:"Office & Onshore",q:"A 'Caution: Falling Objects' sign is placed under a badly stacked shelf. In the hierarchy of controls, this is:",o:["An engineering control","Elimination of the hazard","An administrative control, which is among the weakest","Personal protective equipment"],a:2,e:"Signs only warn. They do not stop an object from falling or move anyone out of the way."},
+{z:"Office & Onshore",q:"You arrive at the office car park at 7:45am and every colleague is walking in at the same time. Which parking approach reduces line-of-fire risk the most?",o:["Reverse into the bay when it is quiet so you leave nose-out later","Nose in and rely on the reverse beeper when leaving","Nose in because it is faster in the morning","Park across two bays to give more room"],a:0,e:"The riskiest time to reverse is at close of work, when the lot is full of people. Reversing in early shifts the manoeuvre to a low-traffic moment."},
+{z:"Office & Onshore",q:"A pedestrian lane crosses the vehicle lane in the car park and the driver coming towards you is on a call. What is the best check before crossing?",o:["Cross at once because pedestrians have right of way","Make eye contact and confirm the driver has seen you and stopped","Listen for the engine, and cross if you hear nothing","Walk quickly so you spend less time in the lane"],a:1,e:"Right of way does not stop a vehicle. A clear acknowledgement from the driver does."},
+{z:"Office & Onshore",q:"You are walking through the company supply base yard to the warehouse office wearing earbuds. What have the earbuds mainly removed?",o:["Your ability to focus on your work","Your right to take a short walk break","Your ability to hear reversing vehicles and warnings, so you cannot detect line-of-fire threats","Nothing, as long as you keep the volume low"],a:2,e:"Hearing is one of your main warning systems around mobile equipment."},
+{z:"Office & Onshore",q:"You approach a double swing door with no vision panel at a busy corridor corner. Which habit is safest?",o:["Push firmly so it opens quickly","Knock hard and wait for the other side to respond","Hold the door open with your body as you pass","Open it slowly and stand slightly to the side of the swing path"],a:3,e:"Blind doors are a classic struck-by hazard. Slow and to the side keeps your body out of the swing."},
+{z:"Office & Onshore",q:"Moving a heavy printer on a trolley DOWN a ramp, where should you stand?",o:["Downhill in front, ready to catch it","Behind and uphill of the trolley, controlling it from above","Beside the ramp edge, holding the front corner","Under the ramp with your hand on the bottom"],a:1,e:"Never stand downhill of a load that can run away. If it slips you are in its path."},
+{z:"Office & Onshore",q:"In the stores room, a gas cylinder has no valve cap and is not chained. What is the biggest line-of-fire concern?",o:["If the valve snaps off, escaping gas can turn the cylinder into a rocket","The cylinder label may fade","It may roll and make noise on the floor","Its colour may attract dust"],a:0,e:"A cylinder with a damaged valve can be propelled at high speed by escaping gas."},
+{z:"Office & Onshore",q:"A facilities worker plans to remove the gas-lift cylinder of an old office chair by hitting it with a hammer. What is the hazard?",o:["The chair will lose its height","The hammer may leave marks","Pressurised cylinder contents or parts may be violently released","None, because it is only a chair"],a:2,e:"Gas springs store energy. Opening or hammering them without the correct procedure can eject components."},
+{z:"Office & Onshore",q:"A cleaner uses a compressed air hose to blow dust off her uniform. Which line-of-fire hazard is she exposing herself to?",o:["The uniform may shrink","The hose will go flat","She may get a headache from the noise","Air can penetrate skin and cause an injection injury, and debris can hit eyes"],a:3,e:"Compressed air should never be pointed at the body. It can force air into the bloodstream and throw particles at high speed."},
+{z:"Office & Onshore",q:"A contractor will replace ceiling panels and light fittings above the open-plan work area. Which control matters most?",o:["Tell the team on the floor to keep working carefully","Barricade and keep people out of the area directly below","Put a bright cone near the contractor's ladder","Ask staff to keep their heads down"],a:1,e:"If a tool or panel falls, nobody should be standing underneath. Exclusion beats awareness."},
+{z:"Office & Onshore",q:"Window cleaners are working from a cradle on the 15th floor of your HQ. What should be in place at ground level?",o:["A sign at the reception desk only","Nothing, because cleaners are tethered","A barricaded drop zone below the work with signage","A security guard to tell pedestrians to hurry past"],a:2,e:"Tethering reduces dropped tools but does not eliminate it. The area below must be protected."},
+{z:"Office & Onshore",q:"A new tall bookshelf has been delivered to the meeting room but is not fixed to the wall. What is the right action?",o:["Anchor it to the wall before loading it, with heavy items at the bottom","Put heavy items on top for better balance","Leave it unfixed because it is in a quiet room","Put it near the door for easy access"],a:0,e:"Unanchored tall furniture can tip. Heavy items at the base lower the centre of gravity."},
+{z:"Office & Onshore",q:"You feel an earth tremor while in the office. Which action avoids line-of-fire hazards best?",o:["Stand next to a window to see what is happening","Run to the lift immediately","Stand near the tall cabinet because it is the sturdiest object","Move away from windows, glass partitions and tall cabinets, and take cover under a sturdy desk"],a:3,e:"Glass and falling furniture are the main injury mechanisms in tremors."},
+{z:"Office & Onshore",q:"On the way to the office, a colleague says, 'I am in the back seat, so I don't need a seatbelt, the front seats will protect me.' What is the flaw?",o:["There is no flaw, because the front seats absorb impact","In a crash, an unbelted rear passenger becomes a projectile that can hit the front occupants","The flaw is only that it breaks traffic rules","The flaw is that the back seat is more comfortable with a belt"],a:1,e:"An unrestrained person at 60 km/h can hit front occupants with several times their own body weight in force."},
+{z:"Office & Onshore",q:"A colleague puts a laptop and a water bottle on the rear parcel shelf of the company car. What is the issue?",o:["The laptop may overheat in the sun","The bottle may leak","In a hard stop they become projectiles aimed at the occupants","It blocks the rear mirror only"],a:2,e:"Loose items store kinetic energy and travel forward in a sudden stop."},
+{z:"Office & Onshore",q:"You are driving behind a flatbed truck carrying pipes secured with a single strap. What is the safest decision?",o:["Increase your following distance and avoid driving alongside until you can safely pass; report if it is unsafe","Drive close behind to keep out of the wind","Overtake immediately and stay alongside","Take no action because the driver is responsible"],a:0,e:"Unsecured loads can shift or fall. Distance buys time and keeps you out of the load's path."},
+{z:"Office & Onshore",q:"During office refurbishment, a contractor uses a powder-actuated (nail) tool on a wall. Which approach is correct?",o:["Only the operator needs a barrier because it is a small tool","Stand behind the operator so you can watch","Use it as normal because it is only a wall","Clear and cordon off both sides of the wall, because a fastener can pass through or ricochet"],a:3,e:"Fasteners can penetrate thin walls or ricochet. The hazard exists on the other side too."},
+{z:"Office & Onshore",q:"You must walk from the office block to the stores through the base yard where forklifts operate. What is the best practice?",o:["Take the shortest route between the stacked pallets","Follow the forklift and walk behind it","Use the designated segregated pedestrian walkway only","Cross whenever the driver waves"],a:2,e:"Segregation is an engineering control. Shortcuts between stacks put you in blind spots."},
+{z:"Office & Onshore",q:"An automatic sliding gate at the office entrance has started to close while you are halfway through. What is the lesson?",o:["Run through because the sensor will stop it","Never enter or linger in the path of a moving gate or barrier; wait for it to fully stop","Hold the gate with your hand","Squeeze between the gate and the post"],a:1,e:"Caught-between hazards happen in seconds. Sensors can fail."},
+{z:"Office & Onshore",q:"A colleague's laptop battery looks swollen and is warm while charging on a desk. What is the best action?",o:["Keep charging so the battery recovers","Press on the swollen area to check it","Put it in your bag to deal with later","Unplug it only if safe, move people away, place it on a non-flammable surface and report it"],a:3,e:"A swollen battery can vent or burst, throwing fragments and flame. Keep people away and report."},
+{z:"Office & Onshore",q:"You have used the same photocopier for 10 years and decide to clear a paper jam with the cover open and the machine still powered. Which factor most increases the risk?",o:["Complacency, because familiar tasks make people skip energy isolation","Poor lighting only","The type of paper used","The brand of copier"],a:0,e:"Many line-of-fire injuries occur during routine tasks where people feel comfortable."},
+{z:"Office & Onshore",q:"In your office, who is responsible for identifying line-of-fire hazards?",o:["Everyone, and each person can speak up or stop the task","Only the HSE department","Only the line supervisor","Only the contractor doing the job"],a:0,e:"Hazards are noticed by those closest to the task. Everyone owns the observation and the action."},
+{z:"Office & Onshore",q:"A staff shuttle bus is reversing in the car park. Where is the safest place to stand?",o:["Directly behind the bus to guide it","Well clear of the vehicle's path, where the driver can see you, ideally with a banksman","In the blind spot beside the rear wheels","Close behind it, waving your arm"],a:1,e:"Big vehicles have large blind spots. 'Guiding' while standing behind a reversing vehicle puts you in the worst spot."},
+{z:"Office & Onshore",q:"A pedestal fan in the open-plan office has its guard removed because 'it kept rattling'. What is the hazard?",o:["More noise only","Dust collecting on the blades","Contact with the rotating blades, and a broken blade could be thrown","Higher electricity cost"],a:2,e:"Guards protect from rotating parts and from fragments if a blade fails."},
+{z:"Office & Onshore",q:"You notice that a ceiling-mounted air-conditioning unit above your desk is sagging and its bracket is rusty. What do you do?",o:["Keep working until it falls","Wait until the next scheduled inspection","Turn it off and sit under it","Move away from underneath it, restrict the area and report it for repair"],a:3,e:"Visible deterioration above people is an immediate hazard to resolve."},
+{z:"Office & Onshore",q:"A heavy binder falls off a shelf and misses you by one metre. You laugh it off. What is the best response?",o:["Ignore it because nobody was hurt","Move the binder to a higher shelf to fix it","Report it as a near miss and fix the storage issue","Tell your colleagues it was lucky and move on"],a:2,e:"The only difference between a near miss and an injury is the position of a person. Reporting drives prevention."},
+{z:"Office & Onshore",q:"You are pushing an office-move trolley loaded with boxes stacked higher than your eyes along a busy corridor. What is best?",o:["Shout 'coming through' repeatedly","Push faster to get past people quickly","Wear a hi-vis vest","Reduce the stack height or use a spotter, so you can see where you are going"],a:3,e:"If you cannot see the path, you cannot avoid the line of fire. Fix the visibility."},
+{z:"Lifting, Cargo & Transfers",q:"During a crane lift on the platform, where should the banksman/signaller stand?",o:["Close to the load so he can hold it steady","Outside the swing radius with a clear view of the load and crane operator, never between the load and a fixed structure","Between the load and the handrail to guide it","Under the boom, so the operator can see him"],a:1,e:"A fixed structure behind you removes your escape route if the load swings."},
+{z:"Lifting, Cargo & Transfers",q:"Which statement about tag lines is correct?",o:["Use a tag line long enough to stay clear of the load, never wrap it round the hand and release it if the load moves towards you","Wrap it around your hand for a better grip","Keep it short so you have more control","Tie it to the handrail to hold the load steady"],a:0,e:"A wrapped line can drag you along with the load or against a structure."},
+{z:"Lifting, Cargo & Transfers",q:"The crane operator says, 'The load will only be up for 10 seconds, so it is fine to walk underneath.' What is correct?",o:["It is acceptable if the load is light","Never walk under a suspended load, regardless of the time involved","It is acceptable if you wear a hard hat","It is acceptable if the banksman agrees"],a:1,e:"The seconds you are under it are the seconds a failure becomes fatal."},
+{z:"Lifting, Cargo & Transfers",q:"In rigging terms, what does standing 'in the bight' mean?",o:["Standing at the hook end of a crane","Standing in the shadow of the boom","Standing on the wrong side of the handrail","Standing in the loop or enclosed area of a rope, wire or sling under tension that could tighten and trap or drag you"],a:3,e:"Bights close rapidly when tension changes. They are common sites of caught-in injuries."},
+{z:"Lifting, Cargo & Transfers",q:"A supply vessel is moored and a tensioned mooring line suddenly parts. Which area is most dangerous?",o:["Behind the bridge wing","Inside the accommodation","The snap-back zone, along the line's path and its extension","At the aft crane cab only"],a:2,e:"A parted line recoils with great energy in the direction of its length."},
+{z:"Lifting, Cargo & Transfers",q:"Lifting a container from a supply vessel in a moving sea, which is the riskiest moment?",o:["At lift-off, when the vessel rises on a swell as the load comes taut and can snatch or swing","When the load is already high above the deck","When the hook is slack","When the crane is stationary"],a:0,e:"Vessel heave can snatch the load and overload the crane or swing the load."},
+{z:"Lifting, Cargo & Transfers",q:"When landing a load on deck, where should hands and body be?",o:["Under the load to feel when it touches the deck","Outside the space beneath and between the load and fixed objects, using tag lines or tools to position it","Between the load and the deck rail to steady it","On top of the load to push it down"],a:1,e:"Crush and pinch points are created exactly where the load lands."},
+{z:"Lifting, Cargo & Transfers",q:"A cargo container has been in transit on a rough crossing and you must open its doors. What is a wise precaution?",o:["Stand directly in front to inspect the content","Open the doors fully at once","Stand to the side, open slowly and expect shifted contents to fall out","Tell a colleague to hold the contents back with his hands"],a:2,e:"Movement at sea can compress or lean cargo against the doors."},
+{z:"Lifting, Cargo & Transfers",q:"On a supply vessel, gas cylinders are stored in a rack and the retaining bar is left unlatched in rough weather. What is the hazard?",o:["Cylinders may fall and roll, and damage to a valve can turn a cylinder into a projectile","Rust on the cylinders","Wrong colour coding","Only inconvenience to the crew"],a:0,e:"Unsecured cylinders become both crushing and projectile hazards."},
+{z:"Lifting, Cargo & Transfers",q:"A forklift is raising a pallet on the platform laydown area. Where should a pedestrian NOT be?",o:["Standing at a safe distance behind a marked line","On the walkway, behind the barrier","In the control room","Under or near raised forks, or in the path of the load and mast"],a:3,e:"Raised loads and forks create a falling and crushing zone."},
+{z:"Lifting, Cargo & Transfers",q:"You are being transferred to a platform in a personnel basket. Which is the right practice?",o:["Keep hands and feet inside the basket rim and never push off the vessel or structure with your limbs","Stretch out an arm to fend off the platform","Hold the outside edge of the rim","Stand on the outside ring and push the structure"],a:0,e:"The basket can swing and pin limbs between it and a structure."},
+{z:"Lifting, Cargo & Transfers",q:"A crane is about to lift, and a worker on the deck sees a person in the lift path and shouts 'Stop!' but the banksman did not see him. What should the crane operator do?",o:["Wait for the official banksman to confirm","Stop the lift immediately if anyone signals stop","Continue because the signal was not from the banksman","Lift faster to clear the area"],a:1,e:"A stop signal from anyone must be obeyed by everyone."},
+{z:"Drilling & Well Operations",q:"A joint of drill pipe is being picked up from the catwalk to the V-door. Which is the most dangerous place to stand?",o:["Beside the control cabin","Behind a guarded rail away from the pipe","At the driller's console","In line with the ends of the pipe or in its path as it swings or rolls"],a:3,e:"The pipe can swing, roll or kick out at either end."},
+{z:"Drilling & Well Operations",q:"Breaking out a connection with rig tongs, where should you stand?",o:["Next to the tong handle to push it","Behind the tong handle holding the line","Outside the arc of the tong handle and breakout line, with no part of your body in the line when it is loaded","In front of the tong, watching the bite"],a:2,e:"If the line parts or the tong slips it swings across the arc with great force."},
+{z:"Drilling & Well Operations",q:"An iron roughneck is spinning and torquing a connection. Where must your hands be?",o:["Outside the jaws and moving parts, with the machine in a safe state if you need to touch anything","Near the jaws to guide the pipe","On the pipe to feel the torque","Inside the arms, to clean the dies"],a:0,e:"Never place hands in an area where machinery can move."},
+{z:"Drilling & Well Operations",q:"A driller is wearing a loose coverall sleeve and cleaning a pump near a rotating shaft. Which hazard is created?",o:["Static shock only","Entanglement, which can pull a limb or the body into rotating equipment","Loss of hearing only","Heat stress"],a:1,e:"Rotating shafts grab loose clothing instantly."},
+{z:"Drilling & Well Operations",q:"Why are whip checks (safety clamps/cables) fitted at hose couplings of high-pressure hoses?",o:["To identify hose type by colour","To add weight to the hose","To restrain the hose if a coupling fails, preventing it from whipping through the work area","To prevent leaks from the hose body"],a:2,e:"A failed coupling on a pressurised hose can whip violently."},
+{z:"Drilling & Well Operations",q:"A hammer union on a high-pressure line is leaking slightly. A colleague suggests tightening it with a hammer while the line is pressurised. What is correct?",o:["Strike lightly, since it is a small leak","Strike it with a copper hammer to avoid sparks","Strike it and stand behind the line","Never strike a hammer union under pressure; depressurise, verify zero pressure and then repair"],a:3,e:"A pressurised union can separate violently when struck."},
+{z:"Drilling & Well Operations",q:"Before working on a mud pump discharge line, what is the correct step?",o:["Close the discharge valve and open the connection immediately","Ask the pump operator to reduce speed","Isolate, bleed pressure to zero through the bleed valve, verify at the gauge and stand to the side when breaking containment","Loosen all bolts evenly while standing in front"],a:2,e:"A closed valve does not mean zero pressure; trapped pressure may remain."},
+{z:"Drilling & Well Operations",q:"BOP pressure testing is about to start. Who should be in the area?",o:["Anyone who wants to watch the test","Crew members taking a break nearby","Any personnel who wear hard hats","Only essential, briefed personnel, with a barricade and clear communication, and people kept outside the pressure line path"],a:3,e:"Pressure tests store a lot of energy. Keep the area clear."},
+{z:"Drilling & Well Operations",q:"During slickline or wireline operations, which is the greatest line-of-fire hazard?",o:["Wire sounding noisy","Wire parting under tension, which can whip across the work area","Lubricator paint colour","Wire becoming warm"],a:1,e:"Parted wire recoils with force and can cut. Keep out of its path and the sheave area."},
+{z:"Drilling & Well Operations",q:"Perforating guns are being armed on the rig floor. Which control is essential?",o:["Restrict access and observe radio silence rules, with the guns pointed away from people at all times","Allow all crew to watch for training","Use mobile phones to coordinate","Point the guns toward the sea so nobody is affected"],a:0,e:"An accidental firing sends a high-energy jet; people must be out of its path and electrical sources controlled."},
+{z:"Drilling & Well Operations",q:"A logging tool containing a radioactive source is on the rig floor. What is the best way to reduce exposure?",o:["Stand close for a short moment","Rely on a hard hat","Stand directly beside it to keep an eye on it","Minimise time, maximise distance and use shielding, and keep out of the line of the source"],a:3,e:"Radiation follows the line of emission. Time, distance and shielding are the key controls."},
+{z:"Drilling & Well Operations",q:"A derrickman is racking pipe at the monkey board. Which is the correct way to carry hand tools?",o:["Tether the tool to the person or structure so it cannot become a dropped object","Put loose tools in a coverall pocket","Place the tools on the board and hope they stay","Throw tools to the rig floor to save time"],a:0,e:"Dropped tools from height are a major line-of-fire hazard for the people below."},
+{z:"Drilling & Well Operations",q:"Which is the best example of ELIMINATING the line-of-fire risk on a drill floor?",o:["Putting up 'Red Zone' signs","Using a remotely operated pipe-handling machine so personnel are not in the red zone","Briefing the crew before each shift","Adding more hard hats on the rig floor"],a:1,e:"If no one needs to be in the zone, no one can be hit."},
+{z:"Drilling & Well Operations",q:"The rig floor has a marked 'red zone' near the pipe-handling equipment. What does it mean?",o:["A place to store tools","An area where only supervisors may stand","An area where entry is restricted while the equipment is operating because of line-of-fire hazards","A smoking area"],a:2,e:"Red zones identify where harm could occur from moving equipment or releases of energy."},
+{z:"Pressure & Stored Energy",q:"You are breaking a flange that has been isolated. Which approach is the best?",o:["Loosen the bolts closest to you first","Remove all bolts fully before checking pressure","Loosen the bolts furthest from you first so any residual pressure vents away from your body","Stand directly in line with the flange gap to watch the release"],a:2,e:"If trapped pressure remains, it should escape away from the worker."},
+{z:"Pressure & Stored Energy",q:"You suspect a small pinhole leak on a high-pressure gas line. How do you find it safely?",o:["Run a gloved hand along the line","Use a gas detector or leak-detection fluid, and never pass your hand over the suspected area","Hold a piece of paper close to the leak","Put your face near the line to listen"],a:1,e:"A high-pressure jet can inject gas or fluid through the skin or cut like a blade."},
+{z:"Pressure & Stored Energy",q:"Before opening the closure door of a pig receiver, what should you do?",o:["Verify the vessel is depressurised and drained, and stand to the side, not in front of the door","Open it as soon as the pig arrival signal shows","Stand in front to see the pig","Release the door lock and wait directly in line"],a:0,e:"Residual pressure can eject the door or the pig. Closure doors are a classic fatal line-of-fire hazard."},
+{z:"Pressure & Stored Energy",q:"A pressure safety valve (PSV) lifts unexpectedly on the process deck. What is the line-of-fire hazard?",o:["The paint on the valve","The noise level only","The valve's colour code","The discharge path of the vent or outlet, where a high-velocity release of gas or liquid can strike people"],a:3,e:"PSVs discharge at high velocity and must be routed away from people."},
+{z:"Pressure & Stored Energy",q:"A line is isolated by two closed valves with a bleed between them (double block and bleed). What must you still do before breaking containment?",o:["Nothing, because two valves are always enough","Open the bleed and verify that pressure reads zero","Trust the shift handover note","Check only the upstream valve"],a:1,e:"Valves can leak by. Verify, do not assume."},
+{z:"Pressure & Stored Energy",q:"A pressure gauge on a high-pressure line has a blow-out back. Why is this important?",o:["It makes the gauge cheaper","It improves the display","It reduces calibration","If the gauge fails, pressure is vented safely to the rear, away from the person reading it"],a:3,e:"A designed blow-out path protects the person reading the gauge."},
+{z:"Pressure & Stored Energy",q:"A worker uses a high-pressure water jetting gun. Which practice is correct?",o:["Keep the nozzle pointed only at the work surface, never at a person, and keep hands out of the jet path","Test the jet on your boot","Hold the nozzle and trigger with one hand while pointing it at a colleague","Remove the dead-man's handle to work faster"],a:0,e:"Water at jetting pressures can cut flesh and bone."},
+{z:"Pressure & Stored Energy",q:"Why must compressed air hoses have whip checks?",o:["To prevent the hose from being stolen","To save compressed air","To stop a hose that disconnects from whipping uncontrollably","To keep the hose clean"],a:2,e:"Even air hoses can whip and cause serious injury when a coupling fails."},
+{z:"Pressure & Stored Energy",q:"A hydraulic cylinder is holding up a heavy hatch cover. You must disconnect a hydraulic hose on that cylinder. What is the safest approach?",o:["Disconnect the hose and stand under the hatch","Assume the cylinder will hold","Ask a colleague to hold the hatch","Mechanically support the hatch first, then release the hydraulic pressure"],a:3,e:"Hydraulic systems hold loads by pressure; releasing the fluid can drop the load."},
+{z:"Pressure & Stored Energy",q:"A spring-return valve actuator is being dismantled. What energy source is still present even when the plant is shut down?",o:["Mechanical energy stored in the spring","Electrical energy only","Thermal energy only","No energy"],a:0,e:"Springs hold stored energy and can eject parts. Follow the manufacturer's de-energising procedure."},
+{z:"Pressure & Stored Energy",q:"A hydraulic torque wrench or bolt tensioner is in use on a flange. Where should you keep your hands and body?",o:["Close to the reaction point so you can steady it","Clear of the reaction arm and the moving parts, and never in the path where the tool can twist or slip","With a hand between the arm and the flange","Directly behind the tool"],a:1,e:"If the reaction arm slips, it can crush anything in its path."},
+{z:"Pressure & Stored Energy",q:"During a pressure test, what is the correct way to raise pressure?",o:["Straight to test pressure to save time","Quickly with everyone watching the gauge","In controlled increments with holds, with people kept clear of the pressurised system and an exclusion zone","With the supervisor holding the line"],a:2,e:"Staged increases allow leaks to be found before reaching maximum stored energy."},
+{z:"Pressure & Stored Energy",q:"A standby pump is not running. Do you need to isolate it before maintenance?",o:["No, because it is not running","No, if you tell the operator","Yes, because it may auto-start; it must be isolated and locked out","Only if the pump is large"],a:2,e:"Standby equipment can start automatically on a process signal."},
+{z:"Pressure & Stored Energy",q:"After locking out equipment, what is the final step before starting work?",o:["Verify zero energy by testing, for example by attempting to start it or checking gauges","Assume zero energy because the lock is on","Ask someone to confirm by phone","Put a second lock on the isolating device"],a:0,e:"Locks isolate. Only testing proves energy has gone."},
+{z:"Dropped Objects",q:"A 1 kg spanner falls 30 metres from the derrick. Roughly how fast is it going when it reaches the deck (ignoring drag)?",o:["About 10 km/h","About 85 to 90 km/h","About 30 km/h","About 250 km/h"],a:1,e:"v = sqrt(2 x 9.81 x 30), which is about 24 m/s or roughly 87 km/h. A small tool becomes a high-energy projectile."},
+{z:"Dropped Objects",q:"A hard hat is rated for impacts. Does it guarantee protection from a 1 kg tool dropped from 30 metres?",o:["Yes, always","Yes, if the strap is tight","Yes, if it is a new hat","No, hard hats are designed for low-energy impacts and do not protect against high-energy drops"],a:3,e:"PPE is the last line of defence and has limits."},
+{z:"Dropped Objects",q:"What is the difference between a 'static' and 'dynamic' dropped object?",o:["Static drops occur only at night","Dynamic drops occur only in the sea","They are the same","Static objects fall from fixed position due to failure of fixings, dynamic ones fall during an activity such as a lift or work"],a:3,e:"Static: loose items, fixtures. Dynamic: tools or loads dropped during work or movement."},
+{z:"Dropped Objects",q:"Why is secondary retention used on light fittings and signs offshore?",o:["Vibration, corrosion and weather can cause the primary fixing to fail, so a second system stops it falling","It looks better","It reduces weight","It saves electricity"],a:0,e:"Secondary retention provides a backup if the primary fixing fails."},
+{z:"Dropped Objects",q:"You must work at height with a heavy wrench. What is best practice?",o:["Put the wrench in your pocket","Tether the wrench to your harness or a fixed point and barricade the area below","Drop it to a colleague","Tape it to your hat"],a:1,e:"Tethers prevent the drop, and barricades protect if something else falls."},
+{z:"Dropped Objects",q:"Scaffolders are building a platform above a walkway. Which is the best control?",o:["Ask people to walk fast under it","Put a warning sign only","Fit toe boards and debris netting and barricade the area below","Ask the scaffolders to shout a warning"],a:2,e:"Physical controls and exclusion zones beat shouting."},
+{z:"Mechanical Hazards",q:"You are using an angle grinder. Where should you stand relative to the disc?",o:["In line with the disc to see better","Out of the plane of rotation of the disc, with the guard in place facing you","With the guard removed for flexibility","Facing the disc edge-on at arm's length"],a:1,e:"If a disc bursts, fragments fly along its plane of rotation."},
+{z:"Mechanical Hazards",q:"A cold chisel has a mushroomed head. Why is it dangerous?",o:["It becomes too heavy","It will not cut at all","It changes the colour of the metal","Pieces can break off and fly like shrapnel when struck"],a:3,e:"Mushroomed heads fragment. Dress or replace the tool."},
+{z:"Mechanical Hazards",q:"A chain block or ratchet lever hoist is being used to pull a load, and the load suddenly releases. What is the line-of-fire hazard?",o:["The handle can whip back, striking anyone in its arc","The chain changes colour","The chain becomes heavier","The hoist becomes silent"],a:0,e:"When tension releases suddenly, the lever swings rapidly."},
+{z:"Mechanical Hazards",q:"A winch drum is rotating with wire on it. A colleague wants to guide the wire onto the drum with his hand. What is correct?",o:["It is fine if wearing gloves","It is fine at slow speed","Never guide wire onto a rotating drum by hand; use a proper spooling device or stop the winch","It is fine if the winch is small"],a:2,e:"Hands and gloves can be pulled into the drum in an instant."},
+{z:"Marine & Emergency",q:"A helicopter has landed with rotors turning. How should passengers approach it?",o:["Straight away from behind","Run toward the tail rotor","Approach from any direction once the engines are on","Only when signalled by the helicopter crew or landing officer, from a direction in view of the pilot, avoiding the tail rotor"],a:3,e:"Tail rotors are nearly invisible and fatal. Follow signals and approach as briefed."},
+{z:"Marine & Emergency",q:"Loose items such as hats and plastic sheets are on the helideck. Why are they a concern?",o:["Rotor wash can blow them into rotors or engines or at people, and they can cause damage or injury","They make the helideck look untidy","They make the helideck slippery","They are not a concern"],a:0,e:"Foreign object debris is a major hazard on a helideck."},
+{z:"Marine & Emergency",q:"After disembarking, you are tempted to take a photo at the helideck while the rotors are still turning. What is right?",o:["Take photos from the front of the helicopter","Move straight to the designated area following the landing officer's instructions","Remain on the helideck","Stand near the tail to get a better view"],a:1,e:"Never linger near rotors."},
+{z:"Marine & Emergency",q:"A watertight door on a platform is being closed in heavy wind. Where should your hand be?",o:["On the door edge","On the hinge side","On the handle, never on the edge or frame of the door where fingers can be caught","On the frame"],a:2,e:"Wind or vessel motion can slam doors shut and amputate fingers."},
+{z:"Marine & Emergency",q:"During a fast rescue craft or lifeboat drill, what is correct regarding the hook release gear?",o:["Pull it early to save time","Hold it with your hand while sitting","Never operate or put hands near the release gear unless properly trained and authorised, and not until afloat","Release it while still on the davit"],a:2,e:"Premature release has caused fatal falls."},
+{z:"Marine & Emergency",q:"The general alarm sounds while a crane lift is in progress. What is the safest expectation?",o:["The lift is stopped and the load made safe so muster routes are clear of suspended loads","The lift continues because it is almost done","The banksman keeps the load over the muster route","Everyone walks under the load to muster faster"],a:0,e:"Muster routes must never pass under suspended loads."},
+{z:"Marine & Emergency",q:"A gas alarm sounds and you hear a hissing release. Which action best reduces line-of-fire exposure?",o:["Walk toward the release to see","Go downwind to look for the source","Stay and take photos","Move upwind and crosswind, away from the release path, and go to muster"],a:3,e:"Jet releases follow a line. Move out of it and upwind."},
+{z:"Marine & Emergency",q:"A storm increases the vessel's movement. What is the line-of-fire implication for loose items on deck?",o:["Nothing changes","They can slide, roll or fall, so everything should be secured and non-essential work stopped","Items always stay where they are","Only large items move"],a:1,e:"Motion converts loose items into moving hazards."},
+{z:"Behaviours & Stop Work",q:"You see a colleague standing under a suspended load, and the lift supervisor is busy. What should you do?",o:["Wait until the supervisor is free","Stop the job immediately using your stop work authority and get the person out of the area","Stay silent because he is experienced","Take a photo as evidence"],a:1,e:"Everyone has the authority and responsibility to stop work."},
+{z:"Behaviours & Stop Work",q:"The permit says 'area isolated and barricaded', but you can see two people working inside the barricade. What should you do?",o:["Assume the permit is right","Join them to help","Stop the job and challenge the discrepancy before anyone proceeds","Continue because you are not on that job"],a:2,e:"If reality does not match the paperwork, the paper is wrong."},
+{z:"Behaviours & Stop Work",q:"A crane lift is planned over a laydown area where scaffolders are working. What is the right response?",o:["Recognise a SIMOPS conflict, stop and coordinate through the permit system so people are out of the lift path","Tell the scaffolders to keep an eye out","Lift quickly before they notice","Lift but tell the banksman to shout"],a:0,e:"Simultaneous operations need explicit coordination."},
+{z:"Behaviours & Stop Work",q:"Which set of questions best helps identify line-of-fire hazards before starting a task?",o:["How long will it take, who is watching, and when is lunch?","Who is the supervisor, what is the weather, and what is the cost?","Where is the toolbox, who has the key, and what is the job number?","What energy is present, where could it go, and where will I be standing?"],a:3,e:"Energy, direction, position, the three keys to line-of-fire awareness."},
+{z:"Behaviours & Stop Work",q:"Night shift hands over to day shift without mentioning that a pressure test is under way in a barricaded area. What is the risk?",o:["The new shift may send people into the exclusion zone","The test will take longer","The test will finish early","No risk"],a:0,e:"Handover is a critical barrier. Residual hazards must be communicated."},
+{z:"Behaviours & Stop Work",q:"It is day 13 of a 14-day swing and you are on a 12-hour night shift. What best describes the line-of-fire implications?",o:["Fatigue has no effect","Experienced workers are immune to fatigue","Fatigue reduces awareness and reaction time, so extra care is needed with positioning and task planning","Fatigue only affects office workers"],a:2,e:"Fatigue erodes situational awareness."},
+{z:"Behaviours & Stop Work",q:"A senior colleague says, 'I have done this a thousand times, just stand there.' Where he points is in the line of fire. What is the right response?",o:["Stand there because he has more experience","Politely stop and ask to reposition or re-plan the task so nobody is in the line of fire","Stand there but watch closely","Stand there and wear extra PPE"],a:1,e:"Experience does not remove the hazard. Challenge respectfully."},
+{z:"Behaviours & Stop Work",q:"Which control is MOST effective against a line-of-fire hazard?",o:["Add a warning sign","Brief people on the hazard","Provide extra PPE","Eliminate the hazard or remove people from the zone entirely"],a:3,e:"Top of the hierarchy: eliminate or engineer people out of the risk."},
+{z:"Behaviours & Stop Work",q:"Orange barrier tape is placed around an area under a crane lift. What does the tape do?",o:["It stops falling objects","It warns people but does not physically stop a load or the energy, so the area must also be kept clear","It protects against pressure release","It makes the area completely safe"],a:1,e:"Tape is a visual cue only. It controls access by behaviour, not by force."},
+{z:"Behaviours & Stop Work",q:"A bolt dropped from a platform lands on the deck and nobody is injured. How should it be classified and handled?",o:["Ignored because there was no injury","Closed after tidying the bolt away","As a dropped object high-potential near miss, reported and investigated","Only reported if it happens twice"],a:2,e:"Potential severity matters, not outcome."},
+{z:"Behaviours & Stop Work",q:"When observing a task, you see someone in the line of fire. What is the best intervention style?",o:["Stop the work, discuss respectfully, and agree on a safer position without blame","Wait and report it at the end of the shift","Shout and humiliate the person","Say nothing"],a:0,e:"Positive intervention at the time fixes the risk and builds trust."},
+{z:"Behaviours & Stop Work",q:"Which principle underlies all line-of-fire controls?",o:["Quick reflexes will protect you","PPE makes you invulnerable","Supervisors should watch everyone","Do not rely on anyone reacting in time; remove people from the path of the energy before it is released"],a:3,e:"Human reaction time is far too slow compared to released energy."}
+];
+
+/* LINE OF FIRE - STORY MODE DATA: 10 continuous stories x 7 steps.
+   Per step: n = scene, q = question, o = options, a = correct index,
+   e = explanation, g = what happens after a good choice, b = after a poor choice. */
+var STORIES = [
+ {
+  "id": 1,
+  "title": "Priya's Big Presentation",
+  "intro": "At 10:00 Priya presents her year-long project to the CEO. It is 8:35, she is running late, and she has a box of printed handouts, a laptop bag and no time to spare. Every choice she makes between the car park and the end of the day counts.",
+  "outro": "Priya's presentation went brilliantly, and she got home in one piece. The biggest decisions of her day were not in the boardroom. They were the quiet ones about where she stood, how she parked and who she looked out for.",
+  "steps": [
+   {
+    "n": "It is 8:35. Priya swings into the office car park with her laptop bag, a box of handouts on the back seat and 85 minutes to go. Only one bay is free, near the entrance, and it needs a bit of manoeuvring to reverse into.",
+    "q": "How should Priya park?",
+    "o": [
+     "Nose in right away, and worry about getting out later on",
+     "Take the extra minute to reverse in, so she can drive out forward tonight",
+     "Stop in the walkway beside the door and unload the handouts there",
+     "Nose in and trust her reversing camera and sensors when she leaves this evening"
+    ],
+    "a": 1,
+    "e": "The riskiest time to reverse is the end of the day, when the car park is full of people heading home. Reversing in while it is quiet moves the manoeuvre to the safest moment.",
+    "g": "She reverses in smoothly and is out of the car by 8:38, with nobody anywhere near her.",
+    "b": "She is out of the car by 8:37, but she has just committed to reversing out into the evening rush."
+   },
+   {
+    "n": "Carrying the box of handouts, Priya heads for the entrance. Two bays ahead, a car's white reversing lights flicker on. The driver seems to be looking at his phone.",
+    "q": "What does Priya do?",
+    "o": [
+     "Hurry across behind it, because she is short of time",
+     "Keep walking at her normal pace, since drivers should look before they reverse",
+     "Wave the box of handouts to get his attention while she keeps walking",
+     "Stop and wait until the driver has seen her or the car has finished moving"
+    ],
+    "a": 3,
+    "e": "A reversing car has blind spots, and the driver may be distracted. Never rely on someone else to see you; stop until you are sure.",
+    "g": "The car rolls back a full bay-length past where she would have been. She exhales and walks on.",
+    "b": "The car stops half a metre from her. The driver looks up, white-faced. She was lucky."
+   },
+   {
+    "n": "Inside, the corridor to the lift ends in a solid double door with no window. Priya's hands are full with the box and her coffee, and the clock says 8:50.",
+    "q": "How should she go through the door?",
+    "o": [
+     "Open it slowly, standing to the side, and check before she walks through",
+     "Bump it open with the box so that she can keep up her pace",
+     "Kick it open so her hands stay on the box and the coffee",
+     "Push it hard so that it clears the way before anyone else can get there first"
+    ],
+    "a": 0,
+    "e": "A door with no vision panel hides anyone on the other side. Opening it slowly and from the side keeps you out of its swing and gives the other person time to react.",
+    "g": "On the other side, a cleaner with a trolley is just passing. The door stops gently and they both smile.",
+    "b": "The door crashes into a cleaner's trolley on the other side, which skids sideways. Nobody is hurt, but it was close."
+   },
+   {
+    "n": "At the lift lobby the doors are closing. Inside, her colleague Sam holds up a hand and mouths, 'Come on!' Priya is at the gap with a box in both arms.",
+    "q": "What should Priya do?",
+    "o": [
+     "Slide the box into the gap so the doors have to reopen",
+     "Put a foot in the doorway so the sensors reopen the doors for her as well",
+     "Let it go and wait for the next lift, even if it costs her two minutes",
+     "Squeeze through the gap sideways before the doors close"
+    ],
+    "a": 2,
+    "e": "Closing lift doors can trap hands, feet and bags, and sensors do not always work. A short wait costs far less than an injury.",
+    "g": "The next lift arrives in under a minute. Sam texts: 'Sorry, I should have held it properly!'",
+    "b": "The doors clip the box and jolt the lift. The handouts scatter across the lobby floor, and picking them up costs her three minutes."
+   },
+   {
+    "n": "On the fifth floor, Priya walks into meeting room B to set up. The wall-mounted screen she will present on has dropped on one side of its bracket and hangs at a slant above the front row of seats.",
+    "q": "What should she do?",
+    "o": [
+     "Straighten it by hand and carry on setting up, because it will probably hold",
+     "Keep the seats under it empty, report it, and ask for another room or a repair",
+     "Present from the far side of the room so that she is not under it herself",
+     "Tell the audience not to lean on the table while the screen is above it"
+    ],
+    "a": 1,
+    "e": "Damaged mounts can fail without warning. Keep people out from under it and get it fixed, rather than trusting that it will hold.",
+    "g": "Facilities swap her into meeting room D with ten minutes to spare, and the room B screen is tagged out.",
+    "b": "The screen holds, for now. But she spends the next ten minutes glancing up at it instead of rehearsing."
+   },
+   {
+    "n": "Sam has found a way to adjust the ceiling projector without a ladder: he is standing on a rolling office chair, reaching up, while the first guests are already walking in below him.",
+    "q": "What should Priya do?",
+    "o": [
+     "Hold the chair steady with her foot so that he can finish more quickly",
+     "Ask the guests to hurry past underneath while he finishes up the adjustment",
+     "Pass him the remote from below so that he does not need to climb down",
+     "Ask him to get down, use a proper stepladder, and keep people out from underneath"
+    ],
+    "a": 3,
+    "e": "A rolling chair is an unstable base, and anything he drops will land on the people below. Use proper access and clear the area underneath.",
+    "g": "Sam climbs down, grinning sheepishly. A stepladder and two minutes later, the projector is aligned and nobody was in range.",
+    "b": "Sam finishes, but the chair slides a little as he jumps down. Nobody is hurt, but the room goes quiet for a moment."
+   },
+   {
+    "n": "The presentation is a triumph. At 6:10pm, tired and happy, Priya walks out into a car park full of people heading home. Her car is where she left it. However she parked this morning, the next minute matters.",
+    "q": "What is the safest way for her to leave?",
+    "o": [
+     "Slowly, with full attention on pedestrians, and with a spotter if she must reverse",
+     "Pull out quickly before the car park gets any busier and the queue builds up",
+     "Check her phone for the congratulations messages as she rolls out",
+     "Rely on her horn to warn people she is moving, and keep an eye on her phone"
+    ],
+    "a": 0,
+    "e": "Whatever you do, the end-of-day car park is full of people on foot. Drive at walking pace, give your full attention, and get a spotter if you must reverse.",
+    "g": "She rolls out slowly. A colleague gives her a thumbs up through the window, and she is home by 7.",
+    "b": "She pulls out too fast and has to brake hard for someone stepping out between cars. They shout, she apologises, and her heart pounds all the way home."
+   }
+  ]
+ },
+ {
+  "id": 2,
+  "title": "Moving Day",
+  "intro": "Marcus has until 5pm to move his whole team to a new floor, and the goods lift is only booked for three hours. Dana, the newest member of the team, is desperate to impress him, and works fast. Maybe too fast.",
+  "outro": "By 5pm the team was settled in the new office and nobody was hurt. Dana is now the first to say 'stop' when something looks unsafe, and Marcus knows it began with the very first thing he said that morning.",
+  "steps": [
+   {
+    "n": "At 9am Dana proudly rolls a trolley towards Marcus with four boxes stacked so high that only her fingertips and the top of her head are visible.",
+    "q": "What should Marcus do?",
+    "o": [
+     "Let her go ahead, because she is keen to impress and the lift slot is so short",
+     "Ask her to push faster so she spends less time in the corridor",
+     "Stop her and reduce the stack below eye level, or split it into two trips",
+     "Tell her to look around the side of the stack as she pushes"
+    ],
+    "a": 2,
+    "e": "If the person pushing cannot see where they are going, they cannot avoid people. Fix the load rather than work around it.",
+    "g": "Dana re-stacks with a grin. Two trips turn out to be quicker than she expected.",
+    "b": "Dana pushes on. At the end of the corridor she clips a door frame, and a box slides off and bursts open at somebody's feet."
+   },
+   {
+    "n": "By ten, Marcus is pushing a trolley himself. He is heading for the corner by reception, where the corridor turns blindly towards the lifts. He can hear voices on the other side.",
+    "q": "How does he approach the corner?",
+    "o": [
+     "Slow down, keep to one side and call out as he reaches the corner",
+     "Speed up so that he clears the corner before anyone arrives",
+     "Take it wide and fast, because the trolley has good brakes",
+     "Keep his head down and watch the wheels of the trolley"
+    ],
+    "a": 0,
+    "e": "Blind corners are where moving loads and people meet. Slowing down and announcing yourself gives everyone time to react.",
+    "g": "A cheerful 'Hello!' comes back from the other side, and a colleague carrying a laptop steps aside to let him through.",
+    "b": "He swings round and a colleague carrying a laptop leaps back against the wall. 'Warn us next time!' she says."
+   },
+   {
+    "n": "The goods lift is full and the clock is ticking. Raj and Tomasz offer to carry a heavy steel filing cabinet down the stairs, with Tomasz going first, below it.",
+    "q": "What should Marcus say?",
+    "o": [
+     "Fine, but only with the stronger person below, as they can take the weight if it slips",
+     "Go ahead, but carry it quickly to keep the strain short",
+     "Tilt it and slide it down the stairs on its back",
+     "Wait for the lift or fetch a stair-climbing trolley, so nobody is below the load"
+    ],
+    "a": 3,
+    "e": "A person below a heavy load on stairs is directly in its path if it slips. Use the lift or the right equipment so that nobody is put there.",
+    "g": "Raj finds a stair-climbing trolley in the storeroom. It takes ten minutes longer, and everyone arrives with all their toes.",
+    "b": "They start down. Halfway, Raj's grip slips and the cabinet lurches onto the step above Tomasz's hands. It stops, just. Tomasz is white as paper."
+   },
+   {
+    "n": "On the new floor, a tall bookcase on a trolley starts rocking as it crosses the doorway. It is leaning forward, and Raj, standing in front of it, throws out his arms.",
+    "q": "As it begins to fall, what must Raj do?",
+    "o": [
+     "Brace his legs and try to catch it before it hits the floor",
+     "Step away and let it fall, rather than try to catch it",
+     "Push back against it with his shoulder",
+     "Hold it with one hand and call for help"
+    ],
+    "a": 1,
+    "e": "A falling bookcase weighs far more than anyone can hold. Never try to catch it. Prevention means emptying and securing it before moving it.",
+    "g": "Raj leaps clear. The bookcase crashes down with a bang, but the only damage is to the carpet.",
+    "b": "The bookcase starts to fall. Raj tries to hold it and is pinned against the doorframe for a few seconds before two colleagues lift it off. He has a bruised shoulder and a lesson."
+   },
+   {
+    "n": "By lunch the corridor outside the new kitchen is cluttered. A large whiteboard is leaning against the wall exactly where people will walk to get their coffee.",
+    "q": "What should Marcus do with it?",
+    "o": [
+     "Lay it flat or secure it away from where people walk",
+     "Leave it, because it is against the wall and out of the way",
+     "Lean it more steeply so that it is less likely to slide",
+     "Rest a mug against the bottom edge to stop it sliding"
+    ],
+    "a": 0,
+    "e": "A leaning panel can slide and fall without being touched. Lay it flat or secure it, instead of relying on friction.",
+    "g": "He lays it on padded blocks along the wall and ties it off. Nobody gives it another glance.",
+    "b": "He leaves it. Twenty minutes later it slides to the floor with a loud crack, in the exact spot where somebody had been standing a moment before."
+   },
+   {
+    "n": "At 2pm the removals van reverses towards the loading door. Dana has a box in her arms and needs to get to the other side of the van, behind it. The glare on the mirror hides the driver's face.",
+    "q": "What should Dana do?",
+    "o": [
+     "Cross quickly behind it while it is still moving slowly, since she has the room",
+     "Stand behind it and guide the driver using hand signals as he reverses in",
+     "Stay clear of its path and wait until it has stopped and the driver has seen her",
+     "Walk alongside the rear door as the van reverses"
+    ],
+    "a": 2,
+    "e": "The area behind a reversing vehicle is a blind spot. Stay out of the path unless a trained banksman is directing and the driver has acknowledged you.",
+    "g": "Dana stays on the kerb. The van stops with a hiss of brakes, the driver gives her a thumbs up, and she crosses.",
+    "b": "The van keeps rolling as she crosses. Marcus shouts, Dana freezes, and the van stops half a metre from her. The driver had not seen her."
+   },
+   {
+    "n": "At 4:30pm the last boxes are loaded. Dana ties them down with a stretchy bungee cord, hooking it over the top and pulling it hard with her face close to the hook. Marcus sees it from the cab.",
+    "q": "What should Marcus do?",
+    "o": [
+     "Tell her to pull it tighter, so that the hook cannot possibly slip off",
+     "Say nothing, since bungee cords are the usual way to secure boxes in a van",
+     "Tell her to tie it with a neater knot so the boxes stay put",
+     "Stop her: a slipped hook can snap into her face, so use rated ratchet straps"
+    ],
+    "a": 3,
+    "e": "Stretched cords store energy. If a hook slips it recoils fast and can cause serious eye injuries. Use suitable straps and keep clear of the line.",
+    "g": "Dana is a little shaken but grateful. By 5pm the load is strapped, the team is in the new office, and Marcus's manager messages: 'Great job. No incidents.'",
+    "b": "The hook slips and the cord whips past Dana's cheek. She is unhurt, but she is not smiling."
+   }
+  ]
+ },
+ {
+  "id": 3,
+  "title": "The Missing Box",
+  "intro": "At 1pm the auditor calls: they need the 2023 invoices by 5pm. Amina knows the box is somewhere in the old store room that nobody has tidied for years. She has four hours, and the room is full of surprises.",
+  "outro": "Amina handed over the invoices with fifteen minutes to spare. The store room was cleared, the shelf was repaired, and facilities now have a monthly check. All because she stopped to deal with the little warning signs.",
+  "steps": [
+   {
+    "n": "Amina switches on the light. The room is crammed with boxes. Straight ahead, the middle shelf of a metal rack is visibly bowing under a stack of archive boxes.",
+    "q": "What should she do about the shelf?",
+    "o": [
+     "Carry on searching, since the shelf has not collapsed so far and has held up for years",
+     "Pull the boxes off quickly, standing right in front of it",
+     "Leave a note on it and search the other side of the room",
+     "Keep clear, tell the facilities team, and have it unloaded in a controlled way"
+    ],
+    "a": 3,
+    "e": "A bowing shelf is a warning that it is overloaded. Nobody should work in front of it until it is made safe.",
+    "g": "Ben from facilities arrives and cordons off the rack with tape. 'Good call,' he says.",
+    "b": "She leaves the shelf for now, but it creaks every time she walks past it."
+   },
+   {
+    "n": "On the top shelf of the next rack she spots a box marked '2023 - Finance'. Ben fetches a stepladder and climbs up. The box looks heavy, and Amina is standing right beneath it.",
+    "q": "Where should she stand while he lowers it?",
+    "o": [
+     "Directly under it, so that she can catch it if his grip slips as he comes down",
+     "Clear of the drop path, ready to take it once it is lowered to a safe height",
+     "Right behind the ladder, to steady Ben and the box as he lowers it",
+     "In the doorway, watching from a distance"
+    ],
+    "a": 1,
+    "e": "Never stand under an object being moved from height. Keep clear and take the weight only once it is at a height you can handle safely.",
+    "g": "Ben lowers the box to chest height and she takes it. It holds old training manuals, not invoices.",
+    "b": "Ben's grip slips and the box thuds to the floor, exactly where she had been standing. It holds old training manuals. Her hands are shaking."
+   },
+   {
+    "n": "The invoices are not there. In the corner, behind a pile of dusty chairs, Amina spots a crate beside a radiator that is blasting heat. On top of it sits a box of aerosol cans.",
+    "q": "What is the concern?",
+    "o": [
+     "Heat raises the pressure, so a can could burst and shoot across the room",
+     "They will lose their smell and propellant, but nothing more serious will happen",
+     "The box may get warm and bend, but the cans themselves are safe",
+     "None, as aerosol cans are designed to be stored anywhere"
+    ],
+    "a": 0,
+    "e": "Pressurised cans become dangerous when heated. Move them away from heat and store them somewhere cool and ventilated.",
+    "g": "She and Ben carry the cans to a cool shelf by the door. Ben says he will log them for disposal.",
+    "b": "They stay where they are. Amina keeps glancing at the cans, and cannot concentrate on the search."
+   },
+   {
+    "n": "The crate is not the one she wants either. Ben heads for the roller shutter to let in more light, but it jams halfway up. 'I'll push it up by hand,' he says, already ducking under.",
+    "q": "What should Amina tell him?",
+    "o": [
+     "Push it up fast and run through before the shutter has a chance to move again",
+     "Hold it up with both hands while she walks through to the other side",
+     "Stop, keep out from under it, tape the area off and report it, as it could drop",
+     "Prop it with a chair and go underneath"
+    ],
+    "a": 2,
+    "e": "A jammed spring-loaded shutter can drop or spring without warning. Nobody should be underneath until a competent person has repaired it.",
+    "g": "Ben steps back out. A quick call to the repair desk later, they agree to work with the lights on instead.",
+    "b": "Ben pushes it up and it drops an inch with a bang before catching. He pulls his hands back, white-faced."
+   },
+   {
+    "n": "It is 3:30pm. In a dark aisle Amina finds a stack of boxes, six high and leaning slightly, with 'Finance' written on the bottom box. The invoices must be in there.",
+    "q": "How should she get to the bottom box?",
+    "o": [
+     "Unstack from the top, then restack with the heavy boxes at the bottom",
+     "Pull the bottom box out quickly and let the rest of the stack settle on its own",
+     "Push the stack against the wall so it can lean on it",
+     "Put one more box on top to even out the lean"
+    ],
+    "a": 0,
+    "e": "Pulling from the bottom of a stack lets it collapse. Take boxes off from the top, and rebuild with the heavy boxes at the base.",
+    "g": "She works from the top, box by box. The bottom box is full of 2023 invoices.",
+    "b": "She pulls the bottom box out and the stack tips, sending boxes crashing across the aisle. She steps back in time, but only just. The box she wanted is full of 2023 invoices."
+   },
+   {
+    "n": "Invoices in hand at last, she heads for the door. Ben, on the ladder to restack the last shelf, calls down, 'Stand there, and I'll toss the boxes down to you to save time.'",
+    "q": "What does Amina say?",
+    "o": [
+     "Go ahead, because she is sure that she will catch each box with both hands",
+     "No, lower or hand each box down, since thrown boxes are unpredictable",
+     "Throw only the light ones and she will carry the heavy ones",
+     "Throw them if she puts on gloves first"
+    ],
+    "a": 1,
+    "e": "Thrown items cannot be controlled, and the person catching is in the line of fire. Lower or hand items down, or use a trolley.",
+    "g": "Ben laughs, 'Fair enough,' and hands them down one at a time. It takes five extra minutes.",
+    "b": "A box bursts open as she fumbles the catch, and old files fan across the floor. Her wrist aches for the rest of the day."
+   },
+   {
+    "n": "At 4:40pm, hurrying out, Amina passes the rack she had first worried about. A box slides off a shelf beside her and lands with a thump exactly where she was standing a second earlier. Nobody is hurt.",
+    "q": "What should she do?",
+    "o": [
+     "Do nothing further, since nobody was hurt and nothing was damaged by the box",
+     "Blame whoever stacked it and move on",
+     "Tidy it away and say nothing, to avoid trouble",
+     "Report it as a near miss and make sure the cause is fixed"
+    ],
+    "a": 3,
+    "e": "A near miss is a free lesson. Reporting it lets the cause be fixed before someone is injured.",
+    "g": "Her report leads to a full review of the store room. Ben tells the facilities manager, 'That was Amina's call.'",
+    "b": "Nobody finds out, and the shelf stays as it is. Three weeks later a colleague has a very similar close call."
+   }
+  ]
+ },
+ {
+  "id": 4,
+  "title": "Jo's Surprise Party",
+  "intro": "Jo has no idea. At 3pm the whole office will pile into the pantry for a surprise birthday party, and Kofi, the office manager, has two hours to get everything ready. It turns out that a party is an ideal place for hazards to hide.",
+  "outro": "Jo walked into a perfect surprise, and nobody went home with an injury. Kofi has since been asked to organise every party in the building, and he now begins each one by checking the pantry for hazards first.",
+  "steps": [
+   {
+    "n": "At 1pm Kofi starts setting up in the pantry. The hot water urn sits right at the edge of the counter, with its cable dangling down the front of the cupboards.",
+    "q": "What does Kofi do about it?",
+    "o": [
+     "Move the urn back from the edge and tidy the cable out of reach",
+     "Leave it where it is, because it has always been there without a problem",
+     "Put a sign on the urn to warn people about the cable",
+     "Ask guests to be careful as they walk past"
+    ],
+    "a": 0,
+    "e": "A dangling cable can be snagged, and the urn could pull boiling water onto whoever is nearby. Remove the hazard instead of warning people about it.",
+    "g": "The urn sits safely at the back. Mei, passing with the cake, says, 'I always walk into that cable!'",
+    "b": "He leaves it. Mei brushes the cable with her bag on the way past, and the urn rocks. She catches it, trembling, and nothing spills."
+   },
+   {
+    "n": "Mei has brought leftover lasagne to warm up for the buffet. She snaps the lid on tight and puts the sealed container in the microwave.",
+    "q": "What should Kofi say?",
+    "o": [
+     "Nothing, as sealed food heats better and stays fresher in a microwave",
+     "Cover it with a cloth to keep the heat in, and leave it to cook",
+     "Vent the lid first, because sealed containers can burst and spray hot food",
+     "Stand closer to the microwave and watch it while it heats up"
+    ],
+    "a": 2,
+    "e": "Steam builds pressure in sealed containers. If the lid fails, hot contents and fragments are thrown outwards.",
+    "g": "Mei props the lid open a crack. Two minutes later the lasagne is bubbling and safe.",
+    "b": "The lid pops with a bang and sauce sprays the inside of the microwave. Mei is a metre back and unharmed."
+   },
+   {
+    "n": "The 19-litre water bottle on the cooler is empty and a full one waits on the floor. Kofi starts to lift it, while Tom, holding the party hats, stands directly in front of the dispenser.",
+    "q": "What should Tom do?",
+    "o": [
+     "Stay put and steady the dispenser with his body while Kofi lifts",
+     "Step clear of the lift path, while Kofi uses good technique or gets help",
+     "Move closer so that he can catch it if it slips",
+     "Move closer so that he can catch the bottle if it slips from Kofi's hands"
+    ],
+    "a": 1,
+    "e": "A 19-litre bottle weighs about 19 kg. If it slips, the person in front of it is in its path. Keep clear and use proper handling or a team lift.",
+    "g": "Tom steps back. Kofi and Tom lift it together and it clicks onto the dispenser.",
+    "b": "Kofi's grip slips and the bottle drops with a thud an inch from Tom's foot. Water goes everywhere."
+   },
+   {
+    "n": "At 2:50pm everyone crowds into the pantry, ready to shout 'Surprise!' Jo's manager has brought a bottle of sparkling wine. Joking, he points it at the door where Jo will walk in.",
+    "q": "What should Kofi do?",
+    "o": [
+     "Let him shake it first, so that the cork pops out with a bigger bang",
+     "Tell him to aim it at the ceiling, so that the cork flies as high as it can",
+     "Say nothing, since it is only a joke and everyone is having a good time",
+     "Ask him to point it away from everyone, hold the cork in a cloth and ease it out"
+    ],
+    "a": 3,
+    "e": "A cork can leave a bottle at high speed and seriously injure an eye. Always point it away from people and control the cork.",
+    "g": "The cork comes out with a soft sigh into a cloth, and there is a ripple of applause.",
+    "b": "The cork shoots across the pantry and rattles off the cupboards. Mei's eyes go wide. Nobody is hit."
+   },
+   {
+    "n": "Jo walks in. Everyone cheers, and the cake comes out. Someone opens the cupboard above the sink to get glasses, and its door swings loose from one hinge with a stack of mugs still inside.",
+    "q": "What should Kofi do?",
+    "o": [
+     "Warn everyone to be careful whenever they stand under it at the sink",
+     "Close it firmly so that it stays shut",
+     "Report it, empty the cupboard and tape it off until it is repaired",
+     "Wait and see whether it falls before doing anything"
+    ],
+    "a": 2,
+    "e": "A warning does not remove the hazard. Make it safe and get it repaired.",
+    "g": "Kofi empties it into a box. Facilities promise to have it fixed by Monday.",
+    "b": "He pushes it shut. As Jo reaches for a glass, it swings open again and a mug rolls out and shatters on the floor."
+   },
+   {
+    "n": "As the toasts wind down, a colleague tries to make Jo a coffee. He pulls the filter holder out of the espresso machine while it is still brewing. Steam hisses.",
+    "q": "What should Kofi tell him?",
+    "o": [
+     "Wait until it has finished brewing and the pressure has dropped",
+     "Pull it out quickly, before the next order is ready to go out",
+     "Twist it off while holding it firmly against the pressure",
+     "Use a cloth to protect his hand and pull harder if it sticks"
+    ],
+    "a": 0,
+    "e": "Espresso machines hold pressurised hot water and steam. Opening one under pressure can spray scalding water.",
+    "g": "He steps back and waits. The hissing stops, and the holder comes out safely.",
+    "b": "The holder jerks loose in a spray of hot coffee that splashes his hand. It stings, but the cold tap helps."
+   },
+   {
+    "n": "At 4pm, as the others leave, Kofi notices the delivery of water cases has been stacked on top of the fridge, almost to the ceiling.",
+    "q": "What should he do?",
+    "o": [
+     "Leave them, as stacking them up high saves valuable floor space",
+     "Store heavy cases at floor level, never up high",
+     "Put a warning label on top so passers-by know to look up",
+     "Ask people to reach for them carefully when they need one"
+    ],
+    "a": 1,
+    "e": "Heavy items stored high can fall onto anyone below. Store them low so that they cannot fall on a person.",
+    "g": "He moves them to the floor. Jo, passing, laughs that she got a party and a safer pantry.",
+    "b": "He leaves them. On Monday morning one slides off the top and bursts on the floor next to the fridge. Nobody is hurt, this time."
+   }
+  ]
+ },
+ {
+  "id": 5,
+  "title": "Five Days Beside the Builders",
+  "intro": "Lena's team has been squeezed into one corner of the floor while contractors renovate the other half. It is Monday, her report is due on Friday, and the only printer is on the far side of a taped-off zone. Five days, five decisions.",
+  "outro": "On Friday at 5pm Lena sent the report, and the renovation was finished without a single injury to staff or contractors. Dev, the supervisor, asked if she would help brief the next team. She said yes.",
+  "steps": [
+   {
+    "n": "Monday, 9:15. The only printer is on the far side of a section the contractors have taped off. Cutting through would take five metres; going round takes two minutes. Nobody seems to be working in there right now.",
+    "q": "What should Lena do?",
+    "o": [
+     "Walk through quickly, since no one is working there right now",
+     "Take the longer way round, even though it adds a couple of minutes",
+     "Duck under the tape, because it is only a short distance",
+     "Lift the tape a little so that she does not have to duck"
+    ],
+    "a": 1,
+    "e": "Barriers mark where there is a risk of falling objects, tools or machinery, even when nobody is visible at that moment.",
+    "g": "At the printer she meets Dev, the contractors' supervisor, who nods approvingly. 'Everyone cuts through, until someone gets hurt,' he says.",
+    "b": "Nothing falls this time. But on her way back, a ceiling tile drops from the open ceiling and shatters exactly where she had just walked."
+   },
+   {
+    "n": "Tuesday, 8:30. Lena realises she left her laptop on a desk inside the cordoned zone, and the ceiling tiles above it have just been removed. The report depends on it.",
+    "q": "What does she do?",
+    "o": [
+     "Go in and grab it quickly before the contractors start on that section",
+     "Send a colleague in to fetch it instead",
+     "Wait for the contractors' lunch break and go in then",
+     "Ask the supervisor to arrange safe retrieval at a suitable time"
+    ],
+    "a": 3,
+    "e": "Entering a drop zone puts you in the path of falling objects. Ask the people who control the area to help.",
+    "g": "Dev escorts her in once the overhead work pauses. Her laptop is retrieved in thirty seconds.",
+    "b": "She darts in and out in ten seconds. A loose ceiling tile drops just behind her as she leaves."
+   },
+   {
+    "n": "Wednesday, 10am. A contractor, Marlon, is about to drill into the wall that backs onto Lena's team's desks. Chen looks up: 'It's a thick wall. It'll be fine, right?'",
+    "q": "What is the right call?",
+    "o": [
+     "Nothing, since the drill only goes into the wall from one side and stops there",
+     "Ask the team to wear headphones to cut the noise of the drilling",
+     "Clear the desks on the other side too, as fixings and debris can come through",
+     "Move one desk back a little and carry on working as normal"
+    ],
+    "a": 2,
+    "e": "Fixings, drill bits and debris can pass through a wall or ricochet, so the hazard exists on both sides.",
+    "g": "The team moves to the meeting room for an hour. When the drill breaks through, a long screw pokes out where Chen's monitor had been.",
+    "b": "The team stays. The drill breaks through with a screech and a long screw pokes out just beside Chen's monitor. Nobody says anything for a while."
+   },
+   {
+    "n": "Wednesday afternoon. A contractor on a stepladder fixing a light fitting drops a spirit level, and it bounces off the floor next to Chen's chair.",
+    "q": "What should Lena do?",
+    "o": [
+     "Ask Chen to move and ask for the area below to be cordoned off and tools secured",
+     "Laugh it off, since nobody was hurt and the level was not even broken",
+     "Throw the level back up to the contractor so that he can carry on with the job",
+     "Ask the contractor to be a bit more careful the next time he works"
+    ],
+    "a": 0,
+    "e": "That was a near miss. The area below the work should be cleared, and tools should be secured when working at height.",
+    "g": "The contractor apologises and ties a lanyard to his tools, and Dev tapes off the area below. 'Thanks for flagging it,' he says.",
+    "b": "The contractor mumbles an apology and carries on. An hour later a screwdriver bounces off the very same spot."
+   },
+   {
+    "n": "Thursday morning. A contractor's compressed-air hose pops off its coupling and starts thrashing across the floor, whipping towards Lena's desk.",
+    "q": "What should she do?",
+    "o": [
+     "Grab the hose and hold it down against the floor until it stops",
+     "Run over and kick it away from the desks as fast as she can",
+     "Throw a coat over it to calm it down before it hits anyone",
+     "Stay clear and let a competent person shut off the air supply"
+    ],
+    "a": 3,
+    "e": "A whipping hose strikes hard and unpredictably. Keep away until the supply has been isolated by someone competent.",
+    "g": "Marlon sprints to the compressor and shuts it off. The hose flops to the floor.",
+    "b": "She reaches for it and it lashes her forearm. A red welt rises, but fortunately that is all."
+   },
+   {
+    "n": "Thursday afternoon. A contractor wheels a pallet of floor tiles on a hand pallet truck down the corridor. Lena is standing between the pallet's path and the wall by the water cooler.",
+    "q": "Where should she go?",
+    "o": [
+     "Stay where she is, between the pallet and the wall, and let it pass slowly",
+     "Step into a clear area or doorway, and make eye contact with the operator",
+     "Walk in front of it to guide the operator along the corridor",
+     "Put her hand on the load to slow it down as it goes past"
+    ],
+    "a": 1,
+    "e": "Standing between a moving load and a wall risks being crushed. Move clear and make sure the operator has seen you.",
+    "g": "She steps into a doorway. The operator nods and rolls past with a hand's width to spare from the wall.",
+    "b": "The pallet scrapes the wall inches from her, squeezing her against the cooler. It is stopped in time, but she is shaken."
+   },
+   {
+    "n": "Friday, 4pm. The report is nearly done. The last job in the renovation is to remove the heavy wooden door of the old meeting room. Marlon holds it while Ade starts to undo the last screws, and Lena has to pass right beside them.",
+    "q": "What matters most?",
+    "o": [
+     "Undo all the screws as fast as possible to get the job done quickly",
+     "Stand directly below it and hold the bottom edge while Ade works",
+     "Take the door's weight before the last fixing goes, and stand clear",
+     "Remove the top screws first, standing in front of the door"
+    ],
+    "a": 2,
+    "e": "When the last fixing goes, the door's weight shifts at once. Support it first and keep your body out of its path.",
+    "g": "The door is lowered onto blocks. At 5pm Lena presses send on the report and the whole team goes home in one piece.",
+    "b": "The door swings down with a crash, trapping Ade's foot for a moment. He is okay, but the report is the last thing on anyone's mind."
+   }
+  ]
+ },
+ {
+  "id": 6,
+  "title": "The Parcel That Could Not Wait",
+  "intro": "At 2pm the company signs its biggest client contract, and the original is coming by courier this morning. Tom is covering reception and the loading bay for the day. Everyone has told him the same thing: 'Do not let that parcel go astray.'",
+  "outro": "The contract reached the client with minutes to spare, and Tom went home with every finger and toe. His manager said the delivery had been a rush job. Tom said the rush was the dangerous part.",
+  "steps": [
+   {
+    "n": "At 10:40 a courier van reverses towards the small delivery bay. Tom is waiting outside with a clipboard, eager to meet the driver the moment it arrives.",
+    "q": "Where should Tom wait?",
+    "o": [
+     "Directly behind it, so that the driver can see him in the mirror",
+     "Right beside the loading door, so he can sign for the parcel as soon as it stops",
+     "In a marked safe area, away from the van's path, where the driver can see him",
+     "Anywhere in the bay, because the driver is a trained professional"
+    ],
+    "a": 2,
+    "e": "A reversing van has blind spots and a swing path. Wait where you are out of the way and can be seen.",
+    "g": "The van stops neatly at the bay. The driver, Hamid, climbs out and says, 'Sorry, big day?'",
+    "b": "The van stops with its bumper a pace from where Tom had been standing. Hamid climbs out pale. 'I never saw you.'"
+   },
+   {
+    "n": "Hamid stops, but leaves the engine running while he looks for the parcel in the cab. Tom needs his signature on the delivery form.",
+    "q": "How should Tom approach him?",
+    "o": [
+     "From the front or side, only after Hamid has seen him and the van has stopped",
+     "Walk behind the van to reach the driver's door more quickly than going round",
+     "Wave the form from behind the van until Hamid notices",
+     "Hurry up fast, so that the van does not move off before he arrives"
+    ],
+    "a": 0,
+    "e": "Approach where the driver can see you, and never walk behind a vehicle with the engine running.",
+    "g": "Hamid sees Tom coming and puts the van in park. The form is signed in seconds.",
+    "b": "Hamid does not see him and eases the van back to adjust its position. Tom leaps clear. Hamid is mortified."
+   },
+   {
+    "n": "Hamid hefts a heavy box marked 'CLIENT PACKS' from the back of the van and calls, 'Catch!', ready to toss it across.",
+    "q": "What does Tom say?",
+    "o": [
+     "Catch it with his chest to cushion the weight of the box as best he can",
+     "Try to catch it and hope that it is light",
+     "Catch it, but only if he has a firm grip",
+     "No, hand it over or put it down, because thrown boxes hit people"
+    ],
+    "a": 3,
+    "e": "Thrown boxes are unpredictable and may hit the person or break the contents. Hand items over or set them down.",
+    "g": "'Fair enough,' says Hamid, handing it over. The client packs are inside, but the contract envelope is not. It must be on the pallet.",
+    "b": "Tom catches it awkwardly, and the box bursts open on the floor. Client packs fan out across the bay and he loses ten precious minutes. The contract envelope is not among them."
+   },
+   {
+    "n": "The envelope is taped to a pallet of parcels under stretch film. The pallet leans slightly. Tom takes a box knife to cut the wrap at the leaning face.",
+    "q": "How should he cut the wrap?",
+    "o": [
+     "Standing in front and slicing down the leaning face",
+     "From the side, clear of the leaning face, cutting away from his body",
+     "Cutting the whole wrap open at once, then stepping back",
+     "Lifting the top layer off first and cutting the wrap afterwards"
+    ],
+    "a": 1,
+    "e": "Stretch wrap can be holding back a shifting load. Cut from the side so the load cannot slide onto you, and cut away from your body.",
+    "g": "The wrap peels away and the stack stays put. The envelope is right there.",
+    "b": "As he slices, the load slumps forwards and the top boxes tumble to the floor. He leaps back. The envelope is under them."
+   },
+   {
+    "n": "Hamid lowers a cage of parcels on the tail-lift. The cage wobbles, and Tom reaches to steady it with one foot close to the platform edge.",
+    "q": "What should he do?",
+    "o": [
+     "Stay clear of the platform and leave the cage to the trained operator",
+     "Hold the cage steady with both hands, standing next to the platform",
+     "Keep a foot near the edge to brace it",
+     "Reach under to check that the cage is sitting level"
+    ],
+    "a": 0,
+    "e": "Tail-lift platforms can crush feet and hands. Stay out of the movement zone.",
+    "g": "Hamid lowers it steadily and rolls it off. Tom keeps his feet well clear.",
+    "b": "The platform settles with a thump on the edge of Tom's shoe. It stops short of his toes, but he is shaken."
+   },
+   {
+    "n": "A tight plastic strap holds the last bundle of parcels, and the client folder Tom needs is inside. He has to cut it open.",
+    "q": "What is the safest way?",
+    "o": [
+     "Cut it and let the strap spring open wherever it goes",
+     "Cut it while leaning over the top for a better angle",
+     "Pull on it hard until it snaps, rather than using a cutter",
+     "Hold one end, cut from the side, and keep his face and eyes away"
+    ],
+    "a": 3,
+    "e": "Tensioned strapping stores energy and may whip back when cut, injuring the face and eyes.",
+    "g": "The strap curls away harmlessly. The folder is free.",
+    "b": "The strap whips off the bundle and slaps the wall inches from his cheek."
+   },
+   {
+    "n": "At 1:20pm Tom piles the client folders and the envelope onto a tall cage trolley and rushes towards the lift. One wheel catches on the threshold, the stack tilts, and a colleague is walking past.",
+    "q": "What should Tom do?",
+    "o": [
+     "Hold the stack up with both arms until it settles",
+     "Step clear at once, and in future keep stacks low and heavy items at the base",
+     "Push the trolley harder to get it over the threshold",
+     "Walk ahead of the trolley and pull the front to guide it through the door"
+    ],
+    "a": 1,
+    "e": "A tilting load cannot reliably be stopped by hand. Move out of its fall path, and prevent it by keeping loads low, stable and secured.",
+    "g": "The stack slumps and boxes slide, but everyone is clear. Tom restacks, and the contract reaches the client with ten minutes to spare.",
+    "b": "The stack topples across his arm and the envelope slides across the floor. Tom grabs it, bruised, and runs. It reaches the client with two minutes to spare."
+   }
+  ]
+ },
+ {
+  "id": 7,
+  "title": "Doors Open at Six",
+  "intro": "Sofia has the keys to the hall at 1pm, a team of four, and an empty stage. At 6pm four hundred colleagues will walk in for the company town hall. She has five hours to build an event, and every shortcut is tempting.",
+  "outro": "The doors opened at 6pm on the dot, and the town hall was a triumph. Nobody noticed the dozen small decisions that kept it safe, which is exactly how Sofia likes it.",
+  "steps": [
+   {
+    "n": "1:15pm. Four hundred chairs sit in tall stacks against the wall. Idris has started stacking them twelve high to clear floor space.",
+    "q": "What is the safer approach?",
+    "o": [
+     "Leave them stacked twelve high, because they are against the wall and stable",
+     "Add more chairs to the stack to save even more floor space",
+     "Lean the stacks against each other for extra support",
+     "Use a chair trolley, or stack only to the recommended height"
+    ],
+    "a": 3,
+    "e": "Tall chair stacks are unstable and can topple onto someone. Use the recommended height or a trolley.",
+    "g": "Idris fetches a chair trolley, and the hall is laid out in forty minutes.",
+    "b": "A stack starts to lean and slides. There is a crash, but nobody is near it. Idris goes pale."
+   },
+   {
+    "n": "2:30pm. A heavy speaker on a tripod stand sits at the edge of the walkway beside the stage, exactly where people will walk in.",
+    "q": "What is the safest set-up?",
+    "o": [
+     "Leave it at the edge of the walkway, because speakers are meant to be seen",
+     "Move it where a fall cannot hit anyone, with legs open and the base weighted",
+     "Tie it to a nearby table leg with a thin piece of string to hold it",
+     "Lean it against the wall, out of the way of the crowd as they come in"
+    ],
+    "a": 1,
+    "e": "Tall stands are easily knocked. Keep them out of walkways and make them stable, so that a fall cannot hit a person.",
+    "g": "The speaker moves to the corner with sandbags on its legs. The sound check goes smoothly.",
+    "b": "During sound check Idris's cable snags a leg and the speaker lurches. Sofia catches it with a gasp. Nobody should have been that close."
+   },
+   {
+    "n": "3:15pm. A welcome banner must go on the high beam above the entrance. Idris climbs onto a rolling office chair while people are already carrying coffee urns in beneath him.",
+    "q": "What should Sofia do?",
+    "o": [
+     "Hold the chair steady so that he can finish quickly and get down again",
+     "Ask people to hurry past underneath while he finishes taping up the banner",
+     "Stop him, use a proper stepladder or platform, and keep people out from below",
+     "Stand beneath him and hand up the tape so that he does not need to climb"
+    ],
+    "a": 2,
+    "e": "A rolling chair is unstable and anything dropped lands on the people below. Use proper access and clear the area underneath.",
+    "g": "Idris climbs down. A stepladder, a spotter and a taped-off floor later, the banner is up.",
+    "b": "The chair rolls a few centimetres and Idris grabs the beam, roll of tape clattering to the floor beside a caterer. Nobody is hurt."
+   },
+   {
+    "n": "4pm. Four people are lowering a heavy stage panel into place. Sofia notices one of them has his fingers under the edge, right where it will land.",
+    "q": "What should she tell them?",
+    "o": [
+     "Hold the handles or outer edges, keep fingers clear, and agree signals first",
+     "Hold underneath so that it is fully supported as it goes down into place",
+     "Put hands between the panels to guide it into the gap as it lands",
+     "Hold it wherever is comfortable, since it is a team lift anyway"
+    ],
+    "a": 0,
+    "e": "Fingers trapped between a panel and the surface it lands on are a classic caught-between injury. Use the handles and agree when to lower.",
+    "g": "They count down together and the panel settles with a clean thud. Every finger is accounted for.",
+    "b": "The panel lands and pinches a fingertip. It bleeds and swells, and the plaster does not quite hide the grimace."
+   },
+   {
+    "n": "4:40pm. Outside, a pop-up gazebo for registration is shuddering in gusts of wind. The weights have not yet been put on its legs.",
+    "q": "What should Sofia do?",
+    "o": [
+     "Leave it as it is, because a gazebo is light and easy to move again",
+     "Weigh down each leg properly, and take it down if gusts increase",
+     "Ask visitors to hold the legs while they queue up to register",
+     "Stand under it to keep it down when the wind gets stronger"
+    ],
+    "a": 1,
+    "e": "Light canopies behave like sails and can lift or tumble, hitting people. Weigh them down and do not use them in strong gusts.",
+    "g": "Sandbags go on every leg. When a big gust hits at 5:30, the gazebo shakes but stays put.",
+    "b": "A gust lifts one corner and the whole frame tumbles across the pavement. Nobody is under it, but it is a near thing."
+   },
+   {
+    "n": "5:20pm. Dev has a confetti cannon for the finale. He wants to test it by pointing it at Idris, just for fun.",
+    "q": "What is the right response?",
+    "o": [
+     "Let him test it with a small charge, pointed at Idris's feet",
+     "Agree, but only if Idris puts on a pair of safety glasses first",
+     "Never aim it at a person; read the instructions and fire it up and away",
+     "Test it on herself first, to show everyone that it is safe to use"
+    ],
+    "a": 2,
+    "e": "Compressed-gas launchers can injure the face and eyes at close range. Always aim them away from people.",
+    "g": "Dev fires it straight up. Confetti rains down, and Dev nods, impressed with the pop. It will be perfect.",
+    "b": "The test shot hits Idris's arm with a crack. He yelps and rubs a red mark. 'Not funny,' he says."
+   },
+   {
+    "n": "9:15pm. The town hall was a triumph, and now it is pack-up. A heavy equipment case on wheels is being pushed to the stage edge with the wheel locks off, while Idris waits below to take it.",
+    "q": "What should happen?",
+    "o": [
+     "Lock the wheels, keep it back from the edge, and keep people clear below",
+     "Push it quickly to the edge so the stage is cleared sooner than planned",
+     "Let it settle by itself, since heavy cases do not move easily",
+     "Hold it with one hand while others load the rest"
+    ],
+    "a": 0,
+    "e": "A rolling case can drop off a stage edge onto someone below. Lock the wheels and keep people out of the fall zone.",
+    "g": "The wheels click on, and the case is lowered by ramp. By 10pm the hall is empty and everyone goes home safe.",
+    "b": "The case rolls a hand's width and tips over the edge. Idris dives aside. It crashes where he was standing."
+   }
+  ]
+ },
+ {
+  "id": 8,
+  "title": "Sick Day at Home",
+  "intro": "Hana is working from home on Wednesday, but her son Leo, seven, has a mild cold and is home too. She has a client call at 3pm, a shelf to put up, and the feeling that today is going to be a busy one. Home is her workplace now, and Leo is always within arm's reach.",
+  "outro": "Leo was better by evening, the shelf was up, the bookcase was anchored and the plant was inside. Hana realised that being safe at home takes the same habits as at the office: look up, look behind, and keep people out of the path.",
+  "steps": [
+   {
+    "n": "8:45am. Hana sets up at the desk in the spare room. Behind her chair is a tall bookcase with heavy books on the top shelf, not fixed to the wall. Leo sits nearby with his colouring.",
+    "q": "What is the best fix?",
+    "o": [
+     "Fix it to the wall and move the heavy books to the lower shelves",
+     "Leave it, because it has not fallen so far",
+     "Put a cushion on the floor behind it in case",
+     "Keep the light books at the bottom and the heavy ones on top"
+    ],
+    "a": 0,
+    "e": "Unanchored tall furniture can tip, and top-heavy loads make it worse. Anchor it and keep the weight low.",
+    "g": "She empties the top two shelves and screws the bookcase to the wall. Leo helps to carry the books.",
+    "b": "She leaves it. Leo leans on it to reach a toy and it wobbles alarmingly before settling."
+   },
+   {
+    "n": "10:30am. Hana wants a floating shelf above her monitor to hold her heavy books and a large plant.",
+    "q": "What is the sensible approach?",
+    "o": [
+     "Mount it above the monitor anyway, using the screws that came in the box",
+     "Use strong double-sided tape instead of drilling",
+     "Fit it where nothing heavy is above her head or seat, with suitable fixings",
+     "Hang the heaviest items on the outer edge to balance it"
+    ],
+    "a": 2,
+    "e": "If a shelf holding heavy items fails, whatever is below takes the hit. Place heavy items away from where you sit and use proper fixings.",
+    "g": "She mounts the shelf on the side wall, away from her seat, with proper wall plugs. It holds the books with ease.",
+    "b": "She mounts it above the monitor with the supplied screws. By the afternoon, one end sags a little, and she moves her chair out of the way."
+   },
+   {
+    "n": "11am. Hana is drilling into the wall for the shelf when Leo wanders in, wearing his dinosaur slippers, to ask for a snack.",
+    "q": "What should she do?",
+    "o": [
+     "Keep drilling and answer him over the noise, because it will only take a second",
+     "Stop the drill, put it down safely, and get Leo clear before restarting",
+     "Carry on, but hold the drill more tightly",
+     "Ask Leo to stand directly behind her while she finishes"
+    ],
+    "a": 1,
+    "e": "Bits can break, debris can fly and drills can kick. Anyone in the room is in the line of fire.",
+    "g": "She sets the drill down and takes Leo to the kitchen. When she comes back, dust is all over the floor where he would have been standing.",
+    "b": "She carries on. A shower of dust and a small chip of brick fly out and hit Leo's slipper. He is fine, but she does not use the drill again until he is out of the room."
+   },
+   {
+    "n": "12:30pm. Hana makes lunch in the pressure cooker. The timer has gone off, the lid is tight, and Leo is hungry and standing right by the hob.",
+    "q": "What is the safe approach?",
+    "o": [
+     "Force the lid open with a spoon handle so that she can serve lunch quickly",
+     "Run it under cold water at once and open the lid as soon as it is cool",
+     "Tap the safety valve with a knife to let the steam out faster",
+     "Follow the manual to release the pressure, keeping her face away from the vent"
+    ],
+    "a": 3,
+    "e": "Pressure cookers store steam energy. Forcing the lid can release scalding contents. Follow the instructions and wait for the pressure to drop.",
+    "g": "She waits for the pressure to drop and sends Leo to set the table. The lid lifts easily, and lunch is perfect.",
+    "b": "The lid jerks and a burst of steam shoots up towards the ceiling, a hand's width from Leo's face. They both jump back."
+   },
+   {
+    "n": "3pm. After the call, a storm warning pops up on her phone. The wind is picking up. On her fourth-floor balcony, a heavy potted plant sits on top of the railing, above the pavement.",
+    "q": "What should she do?",
+    "o": [
+     "Leave it, because it has been there for months without any trouble at all",
+     "Hold it down with one hand whenever it gets windy outside",
+     "Move it indoors or to the floor, and keep nothing heavy on a railing",
+     "Water it more so the extra weight keeps it still in the wind"
+    ],
+    "a": 2,
+    "e": "Anything that falls from height can seriously injure people below, even if it is small.",
+    "g": "She carries the plant indoors. Half an hour later, a gust rattles the railing so hard that the empty rail hums.",
+    "b": "She leaves it. A strong gust rocks the pot at about 3:40 and it tips off the railing, shattering on the pavement. Nobody is below, this time."
+   },
+   {
+    "n": "4:15pm. Leo needs medicine from the pharmacy. Hana has to reverse her car out of the shared driveway, where the neighbours' children are playing on the pavement.",
+    "q": "What should she do?",
+    "o": [
+     "Stop and check around the car on foot, making sure the children are clear",
+     "Reverse slowly while sounding her horn to warn the children playing there",
+     "Reverse quickly, so that she is out of the way of the neighbours sooner",
+     "Rely on her parking sensors to warn her if anyone is behind the car"
+    ],
+    "a": 0,
+    "e": "Small children are very hard to see behind a vehicle. Check on foot before you move, and make sure they are clear.",
+    "g": "She finds the neighbours' youngest crouched right behind her car, drawing with chalk. They move him with a laugh.",
+    "b": "She reverses, and the sensors beep late. She brakes hard, a metre from a scooter lying behind the wheel. Her heart pounds."
+   },
+   {
+    "n": "6pm. Hana's husband Sam comes in and goes up into the loft to fetch the camping gear for the weekend. Leo, bored, is waiting directly under the open hatch.",
+    "q": "What should Hana do?",
+    "o": [
+     "Tell Leo to stay so he can help to catch the box when it comes down",
+     "Ask Leo to hold the bottom of the ladder while his dad climbs down",
+     "Let Leo stay where he is if he puts on a hat for protection",
+     "Move Leo away and keep the area under the hatch clear"
+    ],
+    "a": 3,
+    "e": "Anything dropped from the loft lands under the hatch. Keep that area clear while someone is working overhead.",
+    "g": "Sam passes the box down to Hana at the ladder. Leo watches from the sofa. By bedtime he is asleep with a smile.",
+    "b": "A tent pole slips from Sam's hand and clatters through the hatch onto the carpet, right where Leo had been standing."
+   }
+  ]
+ },
+ {
+  "id": 9,
+  "title": "First Day",
+  "intro": "It is Ravi's first day at a new job, and he has decided to cycle in to make a good impression. He has 52 minutes, a new backpack, and a nervous stomach. He also has a commute that runs through traffic, a train station, a building site and a car park.",
+  "outro": "Ravi arrived with ten minutes to spare, and he arrived safe. His new manager asked how his commute had been. 'Uneventful,' he said, and that was the best compliment he could have given it.",
+  "steps": [
+   {
+    "n": "At the first red light, Ravi pulls up beside a large truck, at the front left corner, near the cab. The light is still red.",
+    "q": "Where is the safest place to wait?",
+    "o": [
+     "Beside the cab, because it is near the front",
+     "Behind the truck, or well in front of it where the driver can see him",
+     "Beside the cab, because that is close to the front of the vehicle",
+     "Right next to the front wheel, where he can see the truck's brake lights"
+    ],
+    "a": 1,
+    "e": "Large vehicles have big blind spots down the side, especially when turning. Stay where the driver can see you.",
+    "g": "He rolls back behind the truck. When the light turns green, the truck swings left across the lane where he had been waiting.",
+    "b": "The truck's indicator blinks as the light turns green, and the cab swings across his lane. Ravi brakes, wobbles and stops, heart thumping."
+   },
+   {
+    "n": "Further on, Ravi rides along a row of parked cars. Some have people sitting inside, and a few doors are close to the road.",
+    "q": "How should he ride?",
+    "o": [
+     "Ride close to the parked cars, to leave room for traffic",
+     "Ride quickly past them to reduce the time he is exposed",
+     "Ring his bell and ride close as normal",
+     "Leave about a car-door's width, in case a door opens"
+    ],
+    "a": 3,
+    "e": "Opening car doors are a common cause of cycling injuries. Leave a gap, and expect doors to open.",
+    "g": "A door swings open two cars ahead, a metre into the lane. Ravi sails past with room to spare.",
+    "b": "A door swings open right in front of him. He swerves and scrapes his elbow, but stays upright. The driver looks horrified."
+   },
+   {
+    "n": "He locks his bike at the station and walks to the crossing. The bus he overtook is stopped at the stop, and he needs to get across the road.",
+    "q": "What should he do?",
+    "o": [
+     "Wait until the bus has left, so that he can see all of the traffic",
+     "Cross in front of the bus quickly, while it is stopped",
+     "Cross just behind the bus, as it is the shortest gap",
+     "Wave at the traffic and cross as soon as a driver slows down for him"
+    ],
+    "a": 0,
+    "e": "A stopped bus blocks the view in both directions. Drivers cannot see you and you cannot see them.",
+    "g": "The bus pulls away and a delivery van speeds through the gap he would have stepped into.",
+    "b": "He steps out from behind the bus and a motorbike buzzes past. The rider glares. Ravi's legs are shaking."
+   },
+   {
+    "n": "On the station platform, an announcement says an express train will pass without stopping. Ravi is standing near the edge, looking at his phone.",
+    "q": "What should he do?",
+    "o": [
+     "Stay where he is and hold on to his bag more tightly",
+     "Lean forward a little to get a better view of the train as it comes in",
+     "Step back and stay well behind the yellow line until it has passed",
+     "Stand on the yellow line so that he is first to board"
+    ],
+    "a": 2,
+    "e": "Fast trains create strong air movement and can pull a person towards the track. Keep clear of the platform edge.",
+    "g": "The express roars by in a rush of wind and noise. Ravi is a safe three metres back, hair blown flat.",
+    "b": "The train blasts past with a roar and the wind drags at his coat. He stumbles back, heart pounding."
+   },
+   {
+    "n": "Out of the station, the footpath beside a building site is closed with a sign and a diversion across the road. Going under the scaffold is quicker, and the clock says 8:25.",
+    "q": "What is the right call?",
+    "o": [
+     "Walk under the scaffold quickly, because it saves a few minutes",
+     "Walk along the kerb edge, next to the traffic, instead",
+     "Wait for a gap in the work and run underneath",
+     "Follow the diversion and cross where it is signed"
+    ],
+    "a": 3,
+    "e": "Closed footpaths exist to keep people away from falling objects and work above. Follow the marked route.",
+    "g": "He crosses at the signed crossing. Behind him, a clatter: a scaffold board slides from the top and crashes down on the closed footpath.",
+    "b": "He ducks under and hurries through. Behind him a workman shouts, and Ravi looks back at a spanner lying in the exact spot where he was a second ago."
+   },
+   {
+    "n": "Three streets from the office, a crane is lifting materials over the pavement. A shortcut runs right beneath it and would save two minutes.",
+    "q": "What is the right choice?",
+    "o": [
+     "Take the shortcut, because the crane operator can surely see him from the cab",
+     "Never walk under a suspended load; take the long way round",
+     "Go through quickly when the crane is not moving anything",
+     "Wait until a load is lifted, then run underneath it"
+    ],
+    "a": 1,
+    "e": "A load can drop at any moment. Nobody should be beneath a suspended load, however briefly.",
+    "g": "He takes the long way round. As he turns the corner, a pallet swings out above the spot where the pavement shortcut would have been.",
+    "b": "He hurries under. A banksman waves frantically at him and blows a whistle. Ravi sprints out the other side, shaken."
+   },
+   {
+    "n": "At 8:50, Ravi arrives at the office's basement entrance, where he has to go through the car park. The pedestrian lift is out of service, and the only quick route is up the vehicle ramp.",
+    "q": "What should he do?",
+    "o": [
+     "Use the marked pedestrian route or stairs, or ask security for help",
+     "Walk up the vehicle ramp quickly, while there are no cars",
+     "Walk up the vehicle ramp quickly, while there are no cars coming down it",
+     "Wait for a car to pass and then run up behind it"
+    ],
+    "a": 0,
+    "e": "Vehicle ramps have limited visibility and no space for pedestrians. Use the safe route, even if it takes a little longer.",
+    "g": "A security guard points him to the stairwell. He gets to reception with ten minutes to spare, and a car swings round the ramp behind him.",
+    "b": "He walks up the ramp. Halfway, a car swings round the bend and brakes hard, headlights flashing. Ravi flattens himself against the wall, and arrives at reception pale."
+   }
+  ]
+ },
+ {
+  "id": 10,
+  "title": "The Safety Rep's First Round",
+  "intro": "Grace has just been appointed floor safety rep, and today the facilities team is doing its full maintenance round. Her mentor, Mr Okafor, told her this morning, 'Don't tell me what you saw. Show me what you did about it.'",
+  "outro": "At 5pm Mr Okafor read Grace's notes, then looked up and said, 'This is what a safety rep does.' Grace had not found every hazard in the building, but she had acted on every one she saw.",
+  "steps": [
+   {
+    "n": "9am. A technician is working on an air-conditioning unit above the open-plan desks, standing on a ladder. Two colleagues are sitting directly below him, typing.",
+    "q": "What should Grace do?",
+    "o": [
+     "Tell them to keep an eye on the technician while they carry on typing",
+     "Ask them to keep their heads down and carry on with their work",
+     "Ask them to relocate and ask the technician to cordon off the area below",
+     "Do nothing, since the technician is a trained professional"
+    ],
+    "a": 2,
+    "e": "Tools and panels can drop. Remove people from below the work rather than relying on awareness.",
+    "g": "The colleagues move to a meeting room, and the technician tapes off a square on the floor. Mr Okafor, passing, nods.",
+    "b": "They stay. Twenty minutes later, a panel screw bounces off the desk of one of them. She stares at it, then at Grace."
+   },
+   {
+    "n": "10:15am. In the corridor, Grace finds a fire extinguisher lying on the floor, being used to hold a door open.",
+    "q": "What is the concern and what should she do?",
+    "o": [
+     "A damaged valve could launch it, so put it back in its bracket",
+     "Nothing, as it is just a handy door stop that happens to be there",
+     "It might trip someone, but otherwise it is perfectly safe to use there",
+     "Only that the paint may get scratched on the hard corridor floor"
+    ],
+    "a": 0,
+    "e": "Extinguishers are pressurised. A knocked or damaged valve can send the cylinder flying. Store them securely and have them checked if mishandled.",
+    "g": "She puts it back in its bracket and logs it for inspection. The inspector later finds the valve slightly bent.",
+    "b": "She leaves it. A trolley clips it later and it clangs across the floor with a hiss from the valve. Nobody is hurt, but it is checked at once."
+   },
+   {
+    "n": "11:30am. Facilities are pressure-washing the paved area outside the main entrance. A colleague wants to cut across the area to reach the entrance.",
+    "q": "What is the right response?",
+    "o": [
+     "Walk through quickly while the operator is looking away",
+     "Walk along the edge, where the spray is weaker",
+     "Wait for the operator to wave her through",
+     "Use the alternative entrance, away from the spray and debris"
+    ],
+    "a": 3,
+    "e": "High-pressure jets can throw grit and debris at speed and injure. Use another route.",
+    "g": "Grace leads the way to the side door. A fleck of grit pings off the glass where they had been heading.",
+    "b": "She walks through. A stone flicks from the nozzle and stings her shin through her trousers. 'Lesson learned,' she mutters."
+   },
+   {
+    "n": "1pm. The car park's boom barrier starts to come down as Grace walks behind a car. The car in front hurries through.",
+    "q": "What should she do?",
+    "o": [
+     "Hurry through behind the car before the barrier comes all the way down",
+     "Wait and let the barrier cycle; never rush, duck under or hold it",
+     "Duck under the arm, since it is quicker than waiting",
+     "Hold the arm up for the people walking behind her"
+    ],
+    "a": 1,
+    "e": "Barriers and gates can strike or crush. Wait for a clear cycle.",
+    "g": "She waits. The barrier thumps down on the car behind, which would have been her.",
+    "b": "She hurries through and the arm clips her shoulder bag, spinning her round. It is a small bump, but it could have been much worse."
+   },
+   {
+    "n": "2:30pm. In the records room, mobile shelving racks are closed together. A colleague is standing in the aisle between two racks, looking for a file, and another is about to move the racks.",
+    "q": "What is the key safety step?",
+    "o": [
+     "Check the aisle is empty and lock the racks before anyone goes in",
+     "Move the racks slowly, so anyone inside has time to react",
+     "Rely on the person inside to shout if the racks start moving",
+     "Move the racks quickly, to get the job done before anyone enters"
+    ],
+    "a": 0,
+    "e": "Mobile shelving can crush a person between racks. Always check the aisle and lock the racks before anyone goes in.",
+    "g": "Grace calls out, and the colleague in the aisle steps out. They fit a lock-out tag on the racks before anyone moves them.",
+    "b": "The racks begin to roll. There is a startled shout from inside, and the colleague scrambles out just in time with her file crushed."
+   },
+   {
+    "n": "3:45pm. A waste truck is reversing to collect the bins behind the building, where Grace is carrying out the recycling.",
+    "q": "What should she do?",
+    "o": [
+     "Walk behind it quickly while it is still moving slowly",
+     "Stand behind it so that the driver can see her in the mirror as it reverses",
+     "Stay clear, wait for it to stop, and make sure the driver has seen her",
+     "Wave her arms from behind the truck until the driver stops"
+    ],
+    "a": 2,
+    "e": "Large reversing trucks have major blind spots and a long stopping distance. Stay clear until it is stationary and the driver has acknowledged you.",
+    "g": "The truck stops and the driver gives her a thumbs up through the window. She walks across safely.",
+    "b": "The truck keeps coming, its alarm beeping. She jumps clear against the wall as it stops a metre away."
+   },
+   {
+    "n": "4:30pm. As she finishes her round, Grace notices a contractor setting up a tall ladder on a wobbly surface next to a busy walkway, with no barrier.",
+    "q": "What is the best way to use her safety role?",
+    "o": [
+     "Ignore it, since the contractor is the expert on ladders and knows best",
+     "Politely stop the work, explain the concern, and speak to the supervisor",
+     "Take a photo and send it in after the job is finished for the records",
+     "Wait and see whether anything goes wrong before acting"
+    ],
+    "a": 1,
+    "e": "Everyone has the right and responsibility to stop unsafe work. Raising it early is the point of a safety culture.",
+    "g": "The contractor steps down, moves the ladder to firm ground and puts up a barrier. 'Thanks for stopping me,' he says.",
+    "b": "She waits. The ladder shifts and the contractor grabs the wall, with a lurch. He is fine, but she wishes she had spoken up."
+   }
+  ]
+ }
+];
+
+var cfg=get("lof.cfg",null);
+var S={
+    Q:cfg&&cfg.questions&&cfg.questions.length?cfg.questions:JSON.parse(JSON.stringify(DEF)),
+    sec:cfg&&cfg.seconds||15,
+    sc:get("lof.scores",[]),
+    run:[],i:0,pts:0,res:[],name:"",tid:0,left:0,done:false,admin:false,tab:"lb",
+    editIdx: -1
+};
+
+function $(x){return document.getElementById(x)}
+function get(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function put(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML}
+function show(id){
+    ["s-start","s-hub","s-quiz","s-story","s-end","s-gate","s-admin"].forEach(function(n){$(n).classList.toggle("hide",n!=="s-"+id)});
+    var admBtn = $("adm");
+    if (admBtn) admBtn.style.display = (id === "start" ? "block" : "none");
+    window.scrollTo(0,0);
+}
+function saveCfg(){put("lof.cfg",{questions:S.Q,seconds:S.sec})}
+
+$("go").onclick=function(){
+    var v=$("uname").value.trim();
+    if(!v){$("nerr").textContent="Enter your name to begin.";$("uname").focus();return}
+    $("nerr").textContent="";S.name=v;
+    $("hub-uname").textContent = S.name;
+    show("hub");
+};
+$("uname").onkeydown=function(e){if(e.key==="Enter")$("go").click()};
+$("hub-back").onclick=function(){show("start")};
+
+$("play-quiz").onclick=function(){
+    var pool = S.Q.filter(function(q){return !q.hidden}).slice();
+    if(pool.length < 20) {
+        alert("Not enough active questions to start the quiz. Please unhide more questions in the Admin portal.");
+        return;
+    }
+    for(var j=pool.length-1;j>0;j--){var r=Math.floor(Math.random()*(j+1));var t=pool[j];pool[j]=pool[r];pool[r]=t;}
+    S.run = pool.slice(0, 20);
+    
+    S.i=0;S.pts=0;S.res=[];show("quiz");load();
+};
+
+function segs(){$("segs").innerHTML=S.run.map(function(_,j){return "<i class='"+(j<S.res.length?(S.res[j]?"ok":"no"):j===S.i?"cur":"")+"'></i>"}).join("")}
+
+function load(){
+    var q=S.run[S.i];S.done=false;
+    $("qn").textContent="Question "+(S.i+1)+" of "+S.run.length;$("qs").textContent="Score "+S.pts;segs();
+    $("cat").textContent=q.z||"General";$("qt").textContent=q.q;
+    $("fb").classList.add("hide");$("next").classList.add("hide");$("opts").innerHTML="";
+    
+    var opts = q.o.map(function(opt, idx) { return { text: opt, isCorrect: idx === q.a }; });
+    for(var j=opts.length-1;j>0;j--){var r=Math.floor(Math.random()*(j+1));var t=opts[j];opts[j]=opts[r];opts[r]=t;}
+    
+    opts.forEach(function(opt, k){
+        var b=document.createElement("button");
+        b.className="opt";
+        b.innerHTML="<span class='k'>"+"ABCD"[k]+"</span><span>"+esc(opt.text)+"</span>";
+        b.onclick=function(){answer(k, opt.isCorrect, opts)};
+        $("opts").appendChild(b);
+    });
+    
+    S.left=S.sec*1000;tick();clearInterval(S.tid);
+    S.tid=setInterval(function(){S.left-=100;tick();if(S.left<=0)answer(-1, false, [])},100);
+}
+
+function tick(){var l=Math.max(S.left,0);$("tt").textContent=Math.ceil(l/1000);$("fg").style.strokeDashoffset=138.2*(1-l/(S.sec*1000));$("ring").classList.toggle("low",l<=5000)}
+
+function answer(k, isCorrectOverride, shuffledOpts){
+    if(S.done)return;S.done=true;clearInterval(S.tid);var q=S.run[S.i],ok;
+    
+    var bs=$("opts").children;
+    for(var j=0;j<bs.length;j++){
+        bs[j].disabled=true;
+        if(shuffledOpts && shuffledOpts.length && shuffledOpts[j] && shuffledOpts[j].isCorrect){
+            bs[j].classList.add("right");
+            bs[j].firstChild.textContent="✓";
+        }
+    }
+    ok = isCorrectOverride === true;
+    if(!ok&&k>=0){bs[k].classList.add("wrong");bs[k].firstChild.textContent="✗"}
+    
+    if(ok)S.pts++;S.res.push(ok);$("qs").textContent="Score "+S.pts;segs();
+    var f=$("fb");f.className="fb"+(ok?"":" bad");f.innerHTML="<strong>"+(ok?"✓ Correct":k<0?"⏱ Time is up":"✗ Not quite")+"</strong>"+esc(q.e||"");
+    $("next").textContent=S.i===S.run.length-1?"See my result":"Next question";$("next").classList.remove("hide");$("next").focus();$("next").scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+
+$("next").onclick=function(){S.i++;if(S.i>=S.run.length)finish();else load()};
+document.addEventListener("keydown",function(e){if($("s-quiz").classList.contains("hide")||S.done)return;var k="1234abcd".indexOf(e.key.toLowerCase());if(k>=0){var b=$("opts").children[k%4];if(b)b.click()}});
+
+function finish(){var t=S.run.length,p=Math.round(S.pts/t*100),n=S.name,c,h,m;
+if(p>80){c="t1";h="Safety champion";m="Congratulations, "+n+"! You are truly safety conscious. You know where the energy can go and where to stand. Keep it up and help your team do the same."}
+else if(p>=65){c="t2";h="On the right track";m="Well done, "+n+". You have a solid grasp of line of fire, with a few gaps to close. Review what you missed and keep asking: where can the energy go, and where am I standing?"}
+else{c="t3";h="Time for a refresher";m="Thanks for taking part, "+n+". Line of fire hazards are easy to miss until you know what to look for. Play again, read each explanation, and ask your supervisor about a refresher."}
+S.sc.push({id:"s"+Date.now(),name:n,score:S.pts,total:t,pct:p,time:new Date().toLocaleString()});put("lof.scores",S.sc);
+$("fin").textContent=S.pts+"/"+t;$("ban").className="banner "+c;$("ban").innerHTML="<h2>"+h+" · "+p+"%</h2>"+esc(m);show("end")}
+
+$("again").onclick=function(){show("hub")};
+
+
+/* ---------- STORY MODE ---------- */
+var ST={story:null,i:0,pts:0,res:[],done:false};
+function pickStory(){
+    var key="lof.story.seen."+S.name.toLowerCase();
+    var seen=get(key,[]),last=seen.length?seen[seen.length-1]:null;
+    var pool=STORIES.filter(function(s){return seen.indexOf(s.id)<0});
+    if(!pool.length){pool=STORIES.filter(function(s){return s.id!==last});seen=[]}
+    var s=pool[Math.floor(Math.random()*pool.length)];
+    seen.push(s.id);put(key,seen);return s;
+}
+$("play-story").onclick=function(){
+    ST.story=pickStory();ST.i=0;ST.pts=0;ST.res=[];ST.done=false;
+    $("st-itl").textContent=ST.story.title;$("st-itx").textContent=ST.story.intro;
+    $("st-intro").classList.remove("hide");$("st-play").classList.add("hide");
+    show("story");
+};
+$("st-back").onclick=function(){show("hub")};
+$("st-begin").onclick=function(){$("st-intro").classList.add("hide");$("st-play").classList.remove("hide");loadStory()};
+function storySegs(){$("st-segs").innerHTML=ST.story.steps.map(function(_,j){return "<i class='"+(j<ST.res.length?(ST.res[j]?"ok":"no"):j===ST.i?"cur":"")+"'></i>"}).join("")}
+function loadStory(){
+    var st=ST.story,q=st.steps[ST.i];ST.done=false;
+    $("st-n").textContent=st.title+" · Part "+(ST.i+1)+" of "+st.steps.length;
+    $("st-s").textContent="Score "+ST.pts;storySegs();
+    $("st-tag").textContent="Part "+(ST.i+1);$("st-scene").textContent=q.n;$("st-qt").textContent=q.q;
+    $("st-fb").classList.add("hide");$("st-next").classList.add("hide");$("st-opts").innerHTML="";
+    var opts=q.o.map(function(t,idx){return {text:t,isCorrect:idx===q.a}});
+    for(var j=opts.length-1;j>0;j--){var r=Math.floor(Math.random()*(j+1));var t=opts[j];opts[j]=opts[r];opts[r]=t}
+    opts.forEach(function(opt,k){
+        var b=document.createElement("button");b.className="opt";
+        b.innerHTML="<span class='k'>"+"ABCD"[k]+"</span><span>"+esc(opt.text)+"</span>";
+        b.onclick=function(){answerStory(k,opt.isCorrect,opts)};
+        $("st-opts").appendChild(b);
+    });
+    window.scrollTo(0,0);
+}
+function answerStory(k,ok,opts){
+    if(ST.done)return;ST.done=true;
+    var st=ST.story,q=st.steps[ST.i],bs=$("st-opts").children;
+    for(var j=0;j<bs.length;j++){
+        bs[j].disabled=true;
+        if(opts[j].isCorrect){bs[j].classList.add("right");bs[j].firstChild.textContent="✓"}
+    }
+    if(!ok){bs[k].classList.add("wrong");bs[k].firstChild.textContent="✗"}
+    if(ok)ST.pts++;ST.res.push(ok);
+    $("st-s").textContent="Score "+ST.pts;storySegs();
+    var f=$("st-fb");f.className="fb"+(ok?"":" bad");
+    f.innerHTML="<strong>"+(ok?"✓ Correct":"✗ Not quite")+"</strong>"+esc(q.e||"")+"<div class='nx'><b>What happens next</b>"+esc((ok?q.g:q.b)||"")+"</div>";
+    var last=ST.i===st.steps.length-1;
+    $("st-next").textContent=last?"See my result":"Continue the story";
+    $("st-next").classList.remove("hide");$("st-next").focus();$("st-next").scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+$("st-next").onclick=function(){ST.i++;if(ST.i>=ST.story.steps.length)finishStory();else loadStory()};
+document.addEventListener("keydown",function(e){
+    if($("s-story").classList.contains("hide")||$("st-play").classList.contains("hide")||ST.done)return;
+    var k="1234abcd".indexOf(e.key.toLowerCase());if(k>=0){var b=$("st-opts").children[k%4];if(b)b.click()}
+});
+function finishStory(){
+    var t=ST.story.steps.length,p=Math.round(ST.pts/t*100),n=S.name,c,h,m;
+    if(p>80){c="t1";h="Safety champion";m="Congratulations, "+n+"! You stayed out of the line of fire and made strong decisions throughout. "}
+    else if(p>=65){c="t2";h="On the right track";m="Well done, "+n+". You handled most of the story well. Review the ones you missed and keep asking: where can the energy go, and where am I standing? "}
+    else{c="t3";h="Time for a refresher";m="Thanks for taking part, "+n+". Every wrong turn in this story is a real-life hazard worth learning from. Play again and read each explanation. "}
+    m+=ST.story.outro;
+    S.sc.push({id:"s"+Date.now(),name:n,mode:"Story: "+ST.story.title,score:ST.pts,total:t,pct:p,time:new Date().toLocaleString()});put("lof.scores",S.sc);
+    $("fin").textContent=ST.pts+"/"+t;$("ban").className="banner "+c;$("ban").innerHTML="<h2>"+h+" · "+p+"%</h2>"+esc(m);show("end");
+}
+
+function route(){if(location.hash==="#admin"){if(S.admin){show("admin");render()}else{show("gate");$("code").value="";$("gerr").textContent="";$("code").focus()}}else{show("start");}}
+addEventListener("hashchange",route);
+$("adm").onclick=function(){if(location.hash==="#admin")route();else location.hash="admin"};
+$("genter").onclick=function(){if($("code").value==="7994"){S.admin=true;show("admin");render()}else $("gerr").textContent="Incorrect passkey. Try again."};
+$("code").onkeydown=function(e){if(e.key==="Enter")$("genter").click()};
+$("gback").onclick=function(){location.hash="";show("start")};
+$("aexit").onclick=function(){S.admin=false;location.hash="";show("start")};
+document.querySelectorAll(".tabs [data-t]").forEach(function(b){b.onclick=function(){S.tab=b.dataset.t;render()}});
+function note(t){$("anote").textContent=t; setTimeout(function(){$("anote").textContent="";},3000);}
+
+function render(){
+    document.querySelectorAll(".tabs [data-t]").forEach(function(b){b.classList.toggle("on",b.dataset.t===S.tab)});
+    ["lb","qs","st"].forEach(function(t){$("t-"+t).classList.toggle("hide",t!==S.tab)});
+    S.editIdx = -1;
+    
+    var r=S.sc.slice().sort(function(a,b){return b.pct-a.pct});
+    $("t-lb").innerHTML=r.length?"<div class='sc'><table><tr><th>#</th><th>Name</th><th>Mode</th><th>Score</th><th>%</th><th>Date</th><th></th></tr>"+r.map(function(x,k){return "<tr><td>"+(k+1)+"</td><td>"+esc(x.name)+"</td><td>"+esc(x.mode||"Quiz")+"</td><td>"+x.score+"/"+x.total+"</td><td><b>"+x.pct+"%</b></td><td>"+esc(x.time)+"</td><td><button class='btn ghost' data-ds='"+esc(x.id)+"'>Remove</button></td></tr>"}).join("")+"</table></div><p><button class='btn ghost' data-act='clr'>Clear all scores</button></p>":"<p class='lead'>No scores recorded yet.</p>";
+    
+    $("t-qs").innerHTML="<h3>"+S.Q.length+" total questions</h3>"+
+    "<div style='max-height: 50vh; overflow-y: auto; margin-bottom: 20px; border: 2px solid var(--l); border-radius: 8px; padding: 10px;'>" +
+    S.Q.map(function(x,k){
+        var isHidden = x.hidden ? " <span class='tag' style='background:var(--m); margin-bottom:0; font-size:12px;'>HIDDEN</span>" : "";
+        return "<div class='q' style='flex-wrap: wrap;'>"+
+          "<span style='width:100%; margin-bottom: 8px; "+ (x.hidden ? "opacity:0.5;" : "") +"'><b>"+(k+1)+".</b> "+esc(x.q)+isHidden+"</span>"+
+          "<div style='display:flex; gap:8px;'>"+
+          "<button class='btn ghost' style='min-height:30px; padding:4px 10px; font-size:14px;' data-eq='"+k+"'>Edit</button>"+
+          "<button class='btn ghost' style='min-height:30px; padding:4px 10px; font-size:14px;' data-hq='"+k+"'>"+(x.hidden?"Show":"Hide")+"</button>"+
+          "<button class='btn ghost' style='min-height:30px; padding:4px 10px; font-size:14px; color:var(--r);' data-rq='"+k+"'>Remove</button>"+
+          "</div></div>"
+    }).join("") + "</div>"+
+    "<h3 id='form-title'>Add a new question</h3>"+
+    "<label for='nz'>Category</label><input id='nz' placeholder='e.g. Offshore'>"+
+    "<label for='nq'>Question</label><textarea id='nq' rows='2'></textarea>"+
+    [0,1,2,3].map(function(k){return "<label for='no"+k+"'>Option "+"ABCD"[k]+"</label><input id='no"+k+"'>"}).join("")+
+    "<label for='na'>Correct answer</label><select id='na'><option value='0'>A</option><option value='1'>B</option><option value='2'>C</option><option value='3'>D</option></select>"+
+    "<label for='ne'>Explanation</label><textarea id='ne' rows='2'></textarea>"+
+    "<div style='display:flex; gap:10px;'><button class='btn' data-act='add' id='btn-add'>Add question</button><button class='btn ghost hide' data-act='cancel-edit' id='btn-cancel-edit' style='margin-top:14px'>Cancel</button></div>"+
+    "<p><button class='btn ghost' data-act='rst'>Restore default 100 questions</button></p>";
+
+    $("t-st").innerHTML="<h3>Time per question</h3><label for='sec'>Seconds (5 to 120)</label><input id='sec' type='number' min='5' max='120' value='"+S.sec+"'><button class='btn' data-act='sec'>Save time</button>";
+}
+
+$("s-admin").addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;var d=b.dataset;
+    if(d.ds){S.sc=S.sc.filter(function(x){return x.id!==d.ds});put("lof.scores",S.sc);render()}
+    else if(d.rq){
+        if(confirm("Permanently delete this question?")) { S.Q.splice(+d.rq,1); saveCfg(); render(); }
+    }
+    else if(d.hq){
+        var k = +d.hq;
+        S.Q[k].hidden = !S.Q[k].hidden;
+        saveCfg();
+        render();
+    }
+    else if(d.eq){
+        var k = +d.eq;
+        var q = S.Q[k];
+        $("nz").value = q.z || "";
+        $("nq").value = q.q;
+        $("no0").value = q.o[0] || "";
+        $("no1").value = q.o[1] || "";
+        $("no2").value = q.o[2] || "";
+        $("no3").value = q.o[3] || "";
+        $("na").value = q.a;
+        $("ne").value = q.e || "";
+        S.editIdx = k;
+        $("form-title").textContent = "Edit Question " + (k+1);
+        $("btn-add").textContent = "Save changes";
+        $("btn-cancel-edit").classList.remove("hide");
+        $("btn-add").scrollIntoView({behavior:"smooth", block:"center"});
+    }
+    else if(d.act==="cancel-edit"){
+        render(); 
+    }
+    else if(d.act==="clr"){if(confirm("Remove all scores?")){S.sc=[];put("lof.scores",S.sc);render()}}
+    else if(d.act==="rst"){
+        if(confirm("This will erase all custom questions and restore the original 100. Proceed?")) {
+            S.Q=JSON.parse(JSON.stringify(DEF));saveCfg();render();note("Defaults restored.");
+        }
+    }
+    else if(d.act==="sec"){
+        var v=Math.round(+$("sec").value);
+        if(v>=5&&v<=120){S.sec=v;saveCfg();note("Saved: "+v+" seconds per question.");}
+        else {note("Enter a number from 5 to 120.");}
+    }
+    else if(d.act==="add"){
+        var o=[0,1,2,3].map(function(k){return $("no"+k).value.trim()});
+        var q=$("nq").value.trim();
+        if(!q||o.some(function(x){return !x})){note("Fill in the question and all four options.");return}
+        
+        var newQ = {z:$("nz").value.trim()||"General",q:q,o:o,a:+$("na").value,e:$("ne").value.trim()};
+        
+        if(S.editIdx >= 0) {
+            newQ.hidden = !!S.Q[S.editIdx].hidden; 
+            S.Q[S.editIdx] = newQ;
+            note("Question updated.");
+        } else {
+            S.Q.push(newQ);
+            note("Question added.");
+        }
+        saveCfg();render();
+    }
+});
+route();
+</script></body></html>
