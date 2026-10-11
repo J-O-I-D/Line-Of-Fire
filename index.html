@@ -683,7 +683,7 @@ function render(){
             [0,1,2,3].forEach(function(ok) {
                 syHtml += "<label>Option "+"ABCD"[ok]+"</label><input id='sy-o-"+sk+"-"+ok+"' value='"+esc(step.o[ok]||"")+"'>";
             });
-            syHtml += "<label>Correct Answer Index</label><select id='sy-a-"+sk'>";
+            syHtml += "<label>Correct Answer Index</label><select id='sy-a-"+sk+"'>";
             [0,1,2,3].forEach(function(ok) { syHtml += "<option value='"+ok+"' "+(step.a===ok?"selected":"")+">"+"ABCD"[ok]+"</option>"; });
             syHtml += "</select>";
             syHtml += "<label>Safety Explanation</label><textarea id='sy-e-"+sk+"' rows='2'>"+esc(step.e)+"</textarea>";
