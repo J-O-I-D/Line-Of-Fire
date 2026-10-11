@@ -59,6 +59,9 @@ input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 0 0 4px var(--
 .scene .tag{margin-bottom:8px}.scene p{margin:0}
 .nx{margin-top:14px;padding-top:12px;border-top:2px solid var(--k);font-style:italic}.nx b{display:block;font:800 16px "Barlow Condensed",Arial,sans-serif;text-transform:uppercase;font-style:normal;letter-spacing:.5px;margin-bottom:2px}
 .story-intro{margin-top:10px}.story-intro h2{margin:6px 0 12px}.story-intro p{font-size:19px}
+.tips-list { margin: 0; padding-left: 20px; font-size: 18px; line-height: 1.6; display: flex; flex-direction: column; gap: 12px; }
+.tips-list li { margin-bottom: 8px; }
+.tips-cat { margin-top: 30px; margin-bottom: 15px; color: var(--r); }
 @media (max-width: 500px) { .hub-grid { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion:reduce){.btn{transition:none}}
 </style></head><body>
@@ -94,12 +97,93 @@ input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 0 0 4px var(--
         <button class="btn" id="play-story" style="margin-top:0">Start Story</button>
     </div>
     <div class="card">
-        <h3 style="margin-top:0">Decode the Hazard</h3>
-        <p style="margin-bottom:20px">Lock your answer as three clues progressively reveal a hazard.</p>
-        <button class="btn ghost" disabled style="width:100%; border:2px dashed var(--m); color:var(--m)">Coming Soon</button>
+        <h3 style="margin-top:0">Safety Tips</h3>
+        <p style="margin-bottom:20px">Review 50 essential Line of Fire rules to keep you safe on the job.</p>
+        <button class="btn ghost" id="play-tips" style="width:100%; border:2px solid var(--k);">View Tips</button>
     </div>
 </div>
 <button class="btn ghost" id="hub-back" style="margin-top:24px">Back to Home</button>
+</section>
+
+<!-- 50 SAFETY TIPS SECTION -->
+<section id="s-tips" class="hide">
+    <div class="top"><div class="row"><div><div class="info">Safety Resources</div></div></div></div>
+    <h2>50 Line of Fire Safety Tips</h2>
+    <p class="lead">Review these critical principles to keep yourself and your team safe.</p>
+    
+    <div class="card" style="margin-bottom:20px;">
+        <h3 class="tips-cat" style="margin-top:0;">General Awareness & Positioning</h3>
+        <ol class="tips-list">
+            <li>Always identify where hazardous energy can go before starting any task.</li>
+            <li>Never position yourself between a moving object and a fixed structure (pinch points).</li>
+            <li>Stay completely out of the direct path of any potential hazard or energy release.</li>
+            <li>If you do not strictly need to be inside a high-risk "Red Zone," step out immediately.</li>
+            <li>Always maintain a clear, unobstructed escape route behind you at all times.</li>
+            <li>Stop work immediately if a colleague unexpectedly wanders into your line of fire.</li>
+            <li>Do not let daily familiarity or routine blind you to evolving line of fire hazards.</li>
+            <li>Never assume a machine is permanently safe just because it is currently switched off.</li>
+            <li>Keep your hands, feet, and entire body completely out of equipment blind spots.</li>
+            <li>Report damaged equipment immediately; it is a line of fire incident waiting to happen.</li>
+        </ol>
+
+        <h3 class="tips-cat">Dropped Objects & Working at Height</h3>
+        <ol class="tips-list" start="11">
+            <li>Never walk, stand, or perform work directly beneath a suspended load.</li>
+            <li>Establish hard physical barricades and exclusion zones directly underneath overhead work.</li>
+            <li>Always tether your hand tools to a secure anchor point when working at height.</li>
+            <li>Never attempt to catch a heavy falling object; step back and let it fall.</li>
+            <li>Store heavy items on the lowest racks and shelves, never above eye level.</li>
+            <li>Ensure toe boards and debris netting are securely installed on all scaffolding.</li>
+            <li>Never throw tools or materials to a colleague; always hand them over or hoist them safely.</li>
+            <li>Wear your hard hat, but remember it only protects against minor impacts, not massive loads.</li>
+            <li>Unanchored tall furniture can tip; always secure tall cabinets firmly to the wall.</li>
+            <li>Use secondary retention (like steel safety wires) on all elevated lights and fixtures.</li>
+        </ol>
+
+        <h3 class="tips-cat">Vehicles, Mobile Plant & Traffic</h3>
+        <ol class="tips-list" start="21">
+            <li>Never walk close behind a reversing vehicle; you are standing in the driver's blind spot.</li>
+            <li>Always make positive, confirmed eye contact with equipment operators before approaching.</li>
+            <li>A heavy vehicle always wins; having the right of way means nothing if the driver cannot see you.</li>
+            <li>Remove earbuds and headphones when walking through active operational transport areas.</li>
+            <li>Reverse into parking spaces when arriving so you can safely drive forward when leaving.</li>
+            <li>Stay entirely clear of the designated snap-back zone of highly tensioned ropes and cables.</li>
+            <li>Use designated physical pedestrian walkways to separate yourself from heavy forklift traffic.</li>
+            <li>Never guide a reversing truck by standing directly behind its path of travel.</li>
+            <li>When opening blind or heavy doors, stand slightly to the side to avoid being struck.</li>
+            <li>Ensure loose items in your vehicle are secured so they do not become projectiles in a sudden hard stop.</li>
+        </ol>
+
+        <h3 class="tips-cat">Pressure & Stored Energy</h3>
+        <ol class="tips-list" start="31">
+            <li>Treat every closed pipe as fully pressurized until definitively proven otherwise via safe testing.</li>
+            <li>Never strike a pressurized hammer union or flange with a tool to tighten or loosen it.</li>
+            <li>When opening a flange, always loosen the bolts furthest from your body first to vent residual pressure away.</li>
+            <li>Ensure steel whip checks are correctly installed on all high-pressure flexible hose connections.</li>
+            <li>Never point compressed air at your body, or use it to clean debris off your work clothes.</li>
+            <li>Keep your body completely clear of the rapid discharge path of pressure safety valves (PSVs).</li>
+            <li>Never use your bare hands to search for high-pressure hydraulic or invisible gas leaks.</li>
+            <li>Stand safely to the side, not directly in front, when opening the closure door of a pig receiver or pressure vessel.</li>
+            <li>Recognize that spring-return mechanisms hold dangerous stored kinetic energy even when the plant is completely powered down.</li>
+            <li>Treat swollen, overheating, or smoking batteries as explosive thermal hazards; keep personnel away and do not touch them.</li>
+        </ol>
+
+        <h3 class="tips-cat">Mechanical, Tools & Lifting Hazards</h3>
+        <ol class="tips-list" start="41">
+            <li>Ensure all machine safety guards are firmly and correctly in place before operating any equipment.</li>
+            <li>Never wear loose clothing, lanyards, or unbuttoned sleeves near rapidly rotating mechanical shafts.</li>
+            <li>Keep your hands entirely clear of the crushing bite point when using rig tongs or iron roughnecks.</li>
+            <li>If a crane tag line is wrapped around your hand, it will violently drag you if the heavy load shifts.</li>
+            <li>Position yourself so you cannot be crushed against a structure if a hydraulic torque wrench reaction arm suddenly slips.</li>
+            <li>When landing a suspended load onto the deck, never place your hands underneath it to manually feel for touchdown.</li>
+            <li>When unlatching heavy cargo doors at sea or on land, stand to the side in case the internal load has dangerously shifted.</li>
+            <li>Never attempt to manually guide a moving wireline or steel cable onto a rapidly rotating winch drum by hand.</li>
+            <li>If a cold chisel or hammer has a mushroomed head, replace it before it splinters into high-speed metal shrapnel.</li>
+            <li>Stand completely out of the direct plane of rotation when operating a high-speed angle grinder or circular saw.</li>
+        </ol>
+    </div>
+    
+    <button class="btn ghost" id="tips-back" style="margin-bottom:20px; border:2px solid var(--k);">Back to Activities</button>
 </section>
 
 <section id="s-quiz" class="hide" aria-live="polite">
@@ -236,7 +320,7 @@ db.ref("scores").on("value", function(snapshot) {
 function $(x){return document.getElementById(x)}
 function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML.replace(/'/g,"&#39;").replace(/"/g,"&quot;")}
 function show(id){
-    ["s-start","s-hub","s-quiz","s-story","s-end","s-gate","s-admin"].forEach(function(n){$(n).classList.toggle("hide",n!=="s-"+id)});
+    ["s-start","s-hub","s-quiz","s-story","s-end","s-gate","s-admin","s-tips"].forEach(function(n){$(n).classList.toggle("hide",n!=="s-"+id)});
     var admBtn = $("adm");
     if (admBtn) admBtn.style.display = (id === "start" ? "block" : "none");
     window.scrollTo(0,0);
@@ -266,6 +350,10 @@ $("go").onclick=function(){
 $("fname").onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();$("lname").focus()}};
 $("lname").onkeydown=function(e){if(e.key==="Enter")$("go").click()};
 $("hub-back").onclick=function(){show("start")};
+
+// Tips interaction
+$("play-tips").onclick=function(){show("tips");};
+$("tips-back").onclick=function(){show("hub");};
 
 $("play-quiz").onclick=function(){
     var pool = S.Q.filter(function(q){return !q.hidden}).slice();
@@ -595,7 +683,7 @@ function render(){
             [0,1,2,3].forEach(function(ok) {
                 syHtml += "<label>Option "+"ABCD"[ok]+"</label><input id='sy-o-"+sk+"-"+ok+"' value='"+esc(step.o[ok]||"")+"'>";
             });
-            syHtml += "<label>Correct Answer Index</label><select id='sy-a-"+sk+"'>";
+            syHtml += "<label>Correct Answer Index</label><select id='sy-a-"+sk'>";
             [0,1,2,3].forEach(function(ok) { syHtml += "<option value='"+ok+"' "+(step.a===ok?"selected":"")+">"+"ABCD"[ok]+"</option>"; });
             syHtml += "</select>";
             syHtml += "<label>Safety Explanation</label><textarea id='sy-e-"+sk+"' rows='2'>"+esc(step.e)+"</textarea>";
