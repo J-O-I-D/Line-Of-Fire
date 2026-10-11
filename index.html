@@ -61,7 +61,7 @@ input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 0 0 4px var(--
 .story-intro{margin-top:10px}.story-intro h2{margin:6px 0 12px}.story-intro p{font-size:19px}
 .tips-list { margin: 0; padding-left: 20px; font-size: 18px; line-height: 1.6; display: flex; flex-direction: column; gap: 12px; }
 .tips-list li { margin-bottom: 8px; }
-.tips-cat { margin-top: 30px; margin-bottom: 15px; color: var(--r); }
+.tips-cat { margin-bottom: 15px; color: var(--r); }
 @media (max-width: 500px) { .hub-grid { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion:reduce){.btn{transition:none}}
 </style></head><body>
@@ -98,90 +98,20 @@ input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 0 0 4px var(--
     </div>
     <div class="card">
         <h3 style="margin-top:0">Safety Tips</h3>
-        <p style="margin-bottom:20px">Review 50 essential Line of Fire rules to keep you safe on the job.</p>
+        <p style="margin-bottom:20px">Review essential Line of Fire rules to keep you safe on the job.</p>
         <button class="btn ghost" id="play-tips" style="width:100%; border:2px solid var(--k);">View Tips</button>
     </div>
 </div>
 <button class="btn ghost" id="hub-back" style="margin-top:24px">Back to Home</button>
 </section>
 
-<!-- 50 SAFETY TIPS SECTION -->
+<!-- SAFETY TIPS VIEWER SECTION -->
 <section id="s-tips" class="hide">
     <div class="top"><div class="row"><div><div class="info">Safety Resources</div></div></div></div>
-    <h2>50 Line of Fire Safety Tips</h2>
+    <h2>Line of Fire Safety Tips</h2>
     <p class="lead">Review these critical principles to keep yourself and your team safe.</p>
     
-    <div class="card" style="margin-bottom:20px;">
-        <h3 class="tips-cat" style="margin-top:0;">General Awareness & Positioning</h3>
-        <ol class="tips-list">
-            <li>Always identify where hazardous energy can go before starting any task.</li>
-            <li>Never position yourself between a moving object and a fixed structure (pinch points).</li>
-            <li>Stay completely out of the direct path of any potential hazard or energy release.</li>
-            <li>If you do not strictly need to be inside a high-risk "Red Zone," step out immediately.</li>
-            <li>Always maintain a clear, unobstructed escape route behind you at all times.</li>
-            <li>Stop work immediately if a colleague unexpectedly wanders into your line of fire.</li>
-            <li>Do not let daily familiarity or routine blind you to evolving line of fire hazards.</li>
-            <li>Never assume a machine is permanently safe just because it is currently switched off.</li>
-            <li>Keep your hands, feet, and entire body completely out of equipment blind spots.</li>
-            <li>Report damaged equipment immediately; it is a line of fire incident waiting to happen.</li>
-        </ol>
-
-        <h3 class="tips-cat">Dropped Objects & Working at Height</h3>
-        <ol class="tips-list" start="11">
-            <li>Never walk, stand, or perform work directly beneath a suspended load.</li>
-            <li>Establish hard physical barricades and exclusion zones directly underneath overhead work.</li>
-            <li>Always tether your hand tools to a secure anchor point when working at height.</li>
-            <li>Never attempt to catch a heavy falling object; step back and let it fall.</li>
-            <li>Store heavy items on the lowest racks and shelves, never above eye level.</li>
-            <li>Ensure toe boards and debris netting are securely installed on all scaffolding.</li>
-            <li>Never throw tools or materials to a colleague; always hand them over or hoist them safely.</li>
-            <li>Wear your hard hat, but remember it only protects against minor impacts, not massive loads.</li>
-            <li>Unanchored tall furniture can tip; always secure tall cabinets firmly to the wall.</li>
-            <li>Use secondary retention (like steel safety wires) on all elevated lights and fixtures.</li>
-        </ol>
-
-        <h3 class="tips-cat">Vehicles, Mobile Plant & Traffic</h3>
-        <ol class="tips-list" start="21">
-            <li>Never walk close behind a reversing vehicle; you are standing in the driver's blind spot.</li>
-            <li>Always make positive, confirmed eye contact with equipment operators before approaching.</li>
-            <li>A heavy vehicle always wins; having the right of way means nothing if the driver cannot see you.</li>
-            <li>Remove earbuds and headphones when walking through active operational transport areas.</li>
-            <li>Reverse into parking spaces when arriving so you can safely drive forward when leaving.</li>
-            <li>Stay entirely clear of the designated snap-back zone of highly tensioned ropes and cables.</li>
-            <li>Use designated physical pedestrian walkways to separate yourself from heavy forklift traffic.</li>
-            <li>Never guide a reversing truck by standing directly behind its path of travel.</li>
-            <li>When opening blind or heavy doors, stand slightly to the side to avoid being struck.</li>
-            <li>Ensure loose items in your vehicle are secured so they do not become projectiles in a sudden hard stop.</li>
-        </ol>
-
-        <h3 class="tips-cat">Pressure & Stored Energy</h3>
-        <ol class="tips-list" start="31">
-            <li>Treat every closed pipe as fully pressurized until definitively proven otherwise via safe testing.</li>
-            <li>Never strike a pressurized hammer union or flange with a tool to tighten or loosen it.</li>
-            <li>When opening a flange, always loosen the bolts furthest from your body first to vent residual pressure away.</li>
-            <li>Ensure steel whip checks are correctly installed on all high-pressure flexible hose connections.</li>
-            <li>Never point compressed air at your body, or use it to clean debris off your work clothes.</li>
-            <li>Keep your body completely clear of the rapid discharge path of pressure safety valves (PSVs).</li>
-            <li>Never use your bare hands to search for high-pressure hydraulic or invisible gas leaks.</li>
-            <li>Stand safely to the side, not directly in front, when opening the closure door of a pig receiver or pressure vessel.</li>
-            <li>Recognize that spring-return mechanisms hold dangerous stored kinetic energy even when the plant is completely powered down.</li>
-            <li>Treat swollen, overheating, or smoking batteries as explosive thermal hazards; keep personnel away and do not touch them.</li>
-        </ol>
-
-        <h3 class="tips-cat">Mechanical, Tools & Lifting Hazards</h3>
-        <ol class="tips-list" start="41">
-            <li>Ensure all machine safety guards are firmly and correctly in place before operating any equipment.</li>
-            <li>Never wear loose clothing, lanyards, or unbuttoned sleeves near rapidly rotating mechanical shafts.</li>
-            <li>Keep your hands entirely clear of the crushing bite point when using rig tongs or iron roughnecks.</li>
-            <li>If a crane tag line is wrapped around your hand, it will violently drag you if the heavy load shifts.</li>
-            <li>Position yourself so you cannot be crushed against a structure if a hydraulic torque wrench reaction arm suddenly slips.</li>
-            <li>When landing a suspended load onto the deck, never place your hands underneath it to manually feel for touchdown.</li>
-            <li>When unlatching heavy cargo doors at sea or on land, stand to the side in case the internal load has dangerously shifted.</li>
-            <li>Never attempt to manually guide a moving wireline or steel cable onto a rapidly rotating winch drum by hand.</li>
-            <li>If a cold chisel or hammer has a mushroomed head, replace it before it splinters into high-speed metal shrapnel.</li>
-            <li>Stand completely out of the direct plane of rotation when operating a high-speed angle grinder or circular saw.</li>
-        </ol>
-    </div>
+    <div id="tips-container" class="card" style="margin-bottom:20px; padding:22px;"></div>
     
     <button class="btn ghost" id="tips-back" style="margin-bottom:20px; border:2px solid var(--k);">Back to Activities</button>
 </section>
@@ -235,12 +165,14 @@ input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 0 0 4px var(--
     <button class="btn ghost on" data-t="lb">Leaderboards</button>
     <button class="btn ghost" data-t="qs">Questions</button>
     <button class="btn ghost" data-t="sy">Stories</button>
+    <button class="btn ghost" data-t="tp">Tips</button>
     <button class="btn ghost" data-t="st">Settings</button>
 </div>
 <div class="err" id="anote" style="color:var(--k)"></div>
 <div id="t-lb"></div>
 <div id="t-qs" class="hide"></div>
 <div id="t-sy" class="hide"></div>
+<div id="t-tp" class="hide"></div>
 <div id="t-st" class="hide"></div>
 </section>
 </main>
@@ -251,6 +183,85 @@ input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 0 0 4px var(--
 <script src="quiz.js"></script>
 <script src="stories.js"></script>
 <script>
+// Default Tips configuration
+var TIPS_DEF = [
+    {
+        cat: "General Awareness & Positioning",
+        tips: [
+            "Always identify where hazardous energy can go before starting any task.",
+            "Never position yourself between a moving object and a fixed structure (pinch points).",
+            "Stay completely out of the direct path of any potential hazard or energy release.",
+            "If you do not strictly need to be inside a high-risk 'Red Zone,' step out immediately.",
+            "Always maintain a clear, unobstructed escape route behind you at all times.",
+            "Stop work immediately if a colleague unexpectedly wanders into your line of fire.",
+            "Do not let daily familiarity or routine blind you to evolving line of fire hazards.",
+            "Never assume a machine is permanently safe just because it is currently switched off.",
+            "Keep your hands, feet, and entire body completely out of equipment blind spots.",
+            "Report damaged equipment immediately; it is a line of fire incident waiting to happen."
+        ]
+    },
+    {
+        cat: "Dropped Objects & Working at Height",
+        tips: [
+            "Never walk, stand, or perform work directly beneath a suspended load.",
+            "Establish hard physical barricades and exclusion zones directly underneath overhead work.",
+            "Always tether your hand tools to a secure anchor point when working at height.",
+            "Never attempt to catch a heavy falling object; step back and let it fall.",
+            "Store heavy items on the lowest racks and shelves, never above eye level.",
+            "Ensure toe boards and debris netting are securely installed on all scaffolding.",
+            "Never throw tools or materials to a colleague; always hand them over or hoist them safely.",
+            "Wear your hard hat, but remember it only protects against minor impacts, not massive loads.",
+            "Unanchored tall furniture can tip; always secure tall cabinets firmly to the wall.",
+            "Use secondary retention (like steel safety wires) on all elevated lights and fixtures."
+        ]
+    },
+    {
+        cat: "Vehicles, Mobile Plant & Traffic",
+        tips: [
+            "Never walk close behind a reversing vehicle; you are standing in the driver's blind spot.",
+            "Always make positive, confirmed eye contact with equipment operators before approaching.",
+            "A heavy vehicle always wins; having the right of way means nothing if the driver cannot see you.",
+            "Remove earbuds and headphones when walking through active operational transport areas.",
+            "Reverse into parking spaces when arriving so you can safely drive forward when leaving.",
+            "Stay entirely clear of the designated snap-back zone of highly tensioned ropes and cables.",
+            "Use designated physical pedestrian walkways to separate yourself from heavy forklift traffic.",
+            "Never guide a reversing truck by standing directly behind its path of travel.",
+            "When opening blind or heavy doors, stand slightly to the side to avoid being struck.",
+            "Ensure loose items in your vehicle are secured so they do not become projectiles in a sudden hard stop."
+        ]
+    },
+    {
+        cat: "Pressure & Stored Energy",
+        tips: [
+            "Treat every closed pipe as fully pressurized until definitively proven otherwise via safe testing.",
+            "Never strike a pressurized hammer union or flange with a tool to tighten or loosen it.",
+            "When opening a flange, always loosen the bolts furthest from your body first to vent residual pressure away.",
+            "Ensure steel whip checks are correctly installed on all high-pressure flexible hose connections.",
+            "Never point compressed air at your body, or use it to clean debris off your work clothes.",
+            "Keep your body completely clear of the rapid discharge path of pressure safety valves (PSVs).",
+            "Never use your bare hands to search for high-pressure hydraulic or invisible gas leaks.",
+            "Stand safely to the side, not directly in front, when opening the closure door of a pig receiver or pressure vessel.",
+            "Recognize that spring-return mechanisms hold dangerous stored kinetic energy even when the plant is completely powered down.",
+            "Treat swollen, overheating, or smoking batteries as explosive thermal hazards; keep personnel away and do not touch them."
+        ]
+    },
+    {
+        cat: "Mechanical, Tools & Lifting Hazards",
+        tips: [
+            "Ensure all machine safety guards are firmly and correctly in place before operating any equipment.",
+            "Never wear loose clothing, lanyards, or unbuttoned sleeves near rapidly rotating mechanical shafts.",
+            "Keep your hands entirely clear of the crushing bite point when using rig tongs or iron roughnecks.",
+            "If a crane tag line is wrapped around your hand, it will violently drag you if the heavy load shifts.",
+            "Position yourself so you cannot be crushed against a structure if a hydraulic torque wrench reaction arm suddenly slips.",
+            "When landing a suspended load onto the deck, never place your hands underneath it to manually feel for touchdown.",
+            "When unlatching heavy cargo doors at sea or on land, stand to the side in case the internal load has dangerously shifted.",
+            "Never attempt to manually guide a moving wireline or steel cable onto a rapidly rotating winch drum by hand.",
+            "If a cold chisel or hammer has a mushroomed head, replace it before it splinters into high-speed metal shrapnel.",
+            "Stand completely out of the direct plane of rotation when operating a high-speed angle grinder or circular saw."
+        ]
+    }
+];
+
 var firebaseConfig = {
     apiKey: "AIzaSyDqmO1wAAHT_v9w-KBT8eEt-C1m91NAEhc",
     authDomain: "line-of-fire-349ce.firebaseapp.com",
@@ -273,10 +284,12 @@ var S = {
     st_sec: 20,
     q_count: 20,
     SY: JSON.parse(JSON.stringify(STORIES_DEF)),
+    tips: JSON.parse(JSON.stringify(TIPS_DEF)),
     sc: [], 
     run: [], i: 0, pts: 0, res: [], name: "", tid: 0, left: 0, done: false, admin: false, tab: "lb",
     editIdx: -1,
-    editSyIdx: -1, tmpSy: null
+    editSyIdx: -1, tmpSy: null,
+    editTipCatIdx: -1, tmpTipCat: null
 };
 
 // Listen for global live CONFIG updates from Firebase
@@ -288,6 +301,16 @@ db.ref("config").on("value", function(snapshot) {
         if (data.st_sec) S.st_sec = data.st_sec;
         if (data.q_count) S.q_count = data.q_count;
         if (data.stories) S.SY = data.stories;
+        
+        // Handle tips (Firebase removes empty arrays, so we must safeguard)
+        if (data.tips) {
+            S.tips = data.tips.map(function(c) {
+                c.tips = c.tips || [];
+                return c;
+            });
+        } else {
+            S.tips = [];
+        }
     }
     
     // Update hub text dynamically
@@ -295,7 +318,7 @@ db.ref("config").on("value", function(snapshot) {
     if (hubQc) hubQc.textContent = S.q_count;
 
     // Auto-refresh the admin panel if we are looking at a config tab
-    if (S.admin && (S.tab === "qs" || S.tab === "sy" || S.tab === "st")) {
+    if (S.admin && (S.tab === "qs" || S.tab === "sy" || S.tab === "st" || S.tab === "tp")) {
         render();
     }
 });
@@ -333,7 +356,8 @@ function saveCfg(){
         seconds: S.sec,
         st_sec: S.st_sec,
         q_count: S.q_count,
-        stories: S.SY
+        stories: S.SY,
+        tips: S.tips
     });
 }
 
@@ -351,8 +375,32 @@ $("fname").onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();$("lname
 $("lname").onkeydown=function(e){if(e.key==="Enter")$("go").click()};
 $("hub-back").onclick=function(){show("start")};
 
+// Render Tips Viewer function
+function renderTipsViewer() {
+    var html = "";
+    var count = 1;
+    S.tips.forEach(function(cat) {
+        html += "<h3 class='tips-cat' style='margin-top: " + (count === 1 ? "0" : "30px") + ";'>" + esc(cat.cat) + "</h3>";
+        html += "<ol class='tips-list' start='" + count + "'>";
+        if (cat.tips && cat.tips.length > 0) {
+            cat.tips.forEach(function(tip) {
+                html += "<li>" + esc(tip) + "</li>";
+                count++;
+            });
+        } else {
+            html += "<li><em>No tips added to this category yet.</em></li>";
+        }
+        html += "</ol>";
+    });
+    if (S.tips.length === 0) html = "<p>No safety tips are currently available.</p>";
+    $("tips-container").innerHTML = html;
+}
+
 // Tips interaction
-$("play-tips").onclick=function(){show("tips");};
+$("play-tips").onclick=function(){
+    renderTipsViewer();
+    show("tips");
+};
 $("tips-back").onclick=function(){show("hub");};
 
 $("play-quiz").onclick=function(){
@@ -573,9 +621,17 @@ function readSyForm() {
     });
 }
 
+function readTpForm() {
+    if (S.editTipCatIdx === -1) return;
+    S.tmpTipCat.cat = $("tp-cat-name").value.trim();
+    S.tmpTipCat.tips.forEach(function(t, tk) {
+        S.tmpTipCat.tips[tk] = $("tp-val-"+tk).value.trim();
+    });
+}
+
 function render(){
     document.querySelectorAll(".tabs [data-t]").forEach(function(b){b.classList.toggle("on",b.dataset.t===S.tab)});
-    ["lb","qs","sy","st"].forEach(function(t){$("t-"+t).classList.toggle("hide",t!==S.tab)});
+    ["lb","qs","sy","tp","st"].forEach(function(t){$("t-"+t).classList.toggle("hide",t!==S.tab)});
     
     // TAB: Leaderboards
     var quizScores = S.sc.filter(function(x){ return !x.mode || x.mode === "Quiz" }).sort(function(a,b){return b.pct-a.pct});
@@ -696,6 +752,38 @@ function render(){
         syHtml += "<button class='btn ghost' data-act='add-step' style='margin-top:14px; border: 2px dashed var(--k)'>+ Add Step</button>";
         syHtml += "<div style='display:flex; gap:10px; margin-top:20px;'><button class='btn' data-act='save-sy'>Save Story</button><button class='btn ghost' data-act='cancel-sy'>Cancel</button></div>";
         $("t-sy").innerHTML = syHtml;
+    }
+    
+    // TAB: Safety Tips
+    if (S.editTipCatIdx === -1) {
+        var tpHtml = "<h3>" + S.tips.length + " Safety Tip Categories</h3><div style='max-height: 50vh; overflow-y: auto; margin-bottom: 20px; border: 2px solid var(--l); border-radius: 8px; padding: 10px;'>";
+        S.tips.forEach(function(x, k) {
+            tpHtml += "<div class='q' style='flex-wrap: wrap;'><span style='width:100%; margin-bottom: 8px;'><b>"+esc(x.cat)+"</b> ("+x.tips.length+" tips)</span>" +
+            "<div style='display:flex; gap:8px;'>" +
+            "<button class='btn ghost' style='min-height:30px; padding:4px 10px; font-size:14px;' data-etp='"+k+"'>Edit</button>" +
+            "<button class='btn ghost' style='min-height:30px; padding:4px 10px; font-size:14px; color:var(--r);' data-rtp='"+k+"'>Remove</button>" +
+            "</div></div>";
+        });
+        tpHtml += "</div><button class='btn' data-act='add-tp-cat'>Add new category</button>";
+        tpHtml += "<p><button class='btn ghost' data-act='rst-tp'>Restore default tips</button></p>";
+        $("t-tp").innerHTML = tpHtml;
+    } else {
+        var cat = S.tmpTipCat;
+        var isNew = (S.editTipCatIdx >= S.tips.length);
+        var tpHtml = "<h3>" + (!isNew ? "Edit Category" : "New Category") + "</h3>";
+        tpHtml += "<label>Category Title</label><input id='tp-cat-name' value='"+esc(cat.cat)+"'>";
+        tpHtml += "<h3 style='margin-top:20px'>Safety Tips ("+cat.tips.length+")</h3>";
+        tpHtml += "<div style='display:flex; flex-direction:column; gap:10px;'>";
+        cat.tips.forEach(function(tip, tk) {
+            tpHtml += "<div style='display:flex; gap:10px; align-items:flex-start;'>";
+            tpHtml += "<textarea id='tp-val-"+tk+"' rows='2' style='flex:1; margin:0;'>"+esc(tip)+"</textarea>";
+            tpHtml += "<button class='btn ghost' style='color:var(--r); min-height:48px;' data-rmtip='"+tk+"'>X</button>";
+            tpHtml += "</div>";
+        });
+        tpHtml += "</div>";
+        tpHtml += "<button class='btn ghost' data-act='add-tip' style='margin-top:14px; border: 2px dashed var(--k)'>+ Add Safety Tip</button>";
+        tpHtml += "<div style='display:flex; gap:10px; margin-top:20px;'><button class='btn' data-act='save-tp'>Save Category</button><button class='btn ghost' data-act='cancel-tp'>Cancel</button></div>";
+        $("t-tp").innerHTML = tpHtml;
     }
 
     // TAB: Settings (Timers & Counts)
@@ -827,6 +915,57 @@ $("s-admin").addEventListener("click",function(e){
         saveCfg();
         render();
         note("Story saved.");
+    }
+    
+    // Tips Actions
+    else if(d.etp){
+        S.editTipCatIdx = +d.etp;
+        S.tmpTipCat = JSON.parse(JSON.stringify(S.tips[S.editTipCatIdx]));
+        render();
+    }
+    else if(d.rtp){
+        if(confirm("Permanently delete this entire category and its tips?")) {
+            S.tips.splice(+d.rtp, 1);
+            saveCfg(); render();
+        }
+    }
+    else if(d.act === "add-tp-cat"){
+        S.editTipCatIdx = S.tips.length; // acts as new
+        S.tmpTipCat = { cat: "", tips: [] };
+        render();
+    }
+    else if(d.act === "add-tip"){
+        readTpForm();
+        S.tmpTipCat.tips.push("");
+        render();
+    }
+    else if(d.rmtip !== undefined){
+        readTpForm();
+        S.tmpTipCat.tips.splice(+d.rmtip, 1);
+        render();
+    }
+    else if(d.act === "cancel-tp"){
+        S.editTipCatIdx = -1;
+        render();
+    }
+    else if(d.act === "save-tp"){
+        readTpForm();
+        if(!S.tmpTipCat.cat) { note("Category Title is required."); return; }
+        if (S.editTipCatIdx >= 0 && S.editTipCatIdx < S.tips.length) {
+            S.tips[S.editTipCatIdx] = JSON.parse(JSON.stringify(S.tmpTipCat));
+        } else {
+            S.tips.push(JSON.parse(JSON.stringify(S.tmpTipCat)));
+        }
+        S.editTipCatIdx = -1;
+        saveCfg();
+        render();
+        note("Tips saved.");
+    }
+    else if(d.act === "rst-tp"){
+        if(confirm("This will erase custom tips and restore the original 50 tips. Proceed?")) { 
+            S.tips = JSON.parse(JSON.stringify(TIPS_DEF)); 
+            saveCfg(); render(); note("Defaults restored."); 
+        }
     }
 });
 route();
